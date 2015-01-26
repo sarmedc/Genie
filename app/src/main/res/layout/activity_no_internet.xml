@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.streetrats.genie.NoInternet"
+    android:background="@color/blue"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Oops!"
+        android:textColor="#FFFFFF"
+        android:textSize="64dp"
+        android:id="@+id/oops"
+        android:layout_marginTop="77dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/something_wrong"
+        android:layout_alignStart="@+id/something_wrong" />
+
+    <TextView
+        android:layout_width="600px"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="24dp"
+        android:text="Something went wrong. Genie cannot open because you do not have an Internet Connection!"
+        android:textColor="#FFFFFF"
+        android:id="@+id/something_wrong"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="64dp"
+        android:text="):"
+        android:id="@+id/sad"
+        android:layout_below="@+id/something_wrong"
+        android:layout_alignRight="@+id/something_wrong"
+        android:layout_alignEnd="@+id/something_wrong"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="70dp" />
+</RelativeLayout>

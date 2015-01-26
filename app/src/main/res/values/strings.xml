@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Genie</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <color name="blue">#357EC7</color>
+
+    <string name="title_activity_no_internet">NoInternet</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+
+</resources>
