@@ -5,9 +5,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="app_id">945894645428503</string>
+
     <color name="blue">#357EC7</color>
 
     <string name="title_activity_no_internet">NoInternet</string>
     <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="profile_name">John L.</string>
 
 </resources>
