@@ -16,7 +16,7 @@ public class HomeScreen extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.profile);
 
         String[] items = {"Xbox One", "Macbook Pro", "GTA 5", "Sweater", "Sofa", "Protein Powder",
                 "Lightbulb", "Backpack", "Canteen", "Toy", "Desktop"};

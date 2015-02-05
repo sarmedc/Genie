@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:background="@color/blue"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Genie"
+        android:textColor="#FFFFFF"
+        android:textSize="64dp"
+        android:typeface="monospace"
+        android:id="@+id/genie_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/genie_lamp"
+        android:src="@drawable/genie_white"
+        android:layout_below="@+id/genie_title"
+        android:layout_marginLeft="90dp"/>
+
+    <!--<EditText
+        android:layout_width="wrap_content"
+        android:layout_height="50px"
+        android:id="@+id/enter_username"
+        android:text="Username"
+        android:gravity="center"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/genie_lamp"
+        android:layout_alignLeft="@+id/enter_password"
+        android:layout_alignStart="@+id/enter_password"
+        android:layout_alignRight="@+id/enter_password"
+        android:layout_alignEnd="@+id/enter_password" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="50px"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/enter_password"
+        android:text="Password"
+        android:gravity="center"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/enter_username"
+        android:layout_centerHorizontal="true" />-->
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/authButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/genie_lamp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <!--<Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="250px"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/okay_button"
+        android:background="@drawable/rounded_buttons"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_below="@+id/enter_password"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="57dp"
+        android:onClick="loggedIn"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="250px"
+        android:layout_height="wrap_content"
+        android:text="Signup"
+        android:id="@+id/new_account_button"
+        android:background="@drawable/rounded_buttons"
+        android:layout_alignTop="@+id/okay_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp" />-->
+
+</RelativeLayout>
