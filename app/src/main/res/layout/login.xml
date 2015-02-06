@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/genie_lamp"
-        android:src="@drawable/genie_white"
+        android:src="@drawable/genie_white_normal"
         android:layout_below="@+id/genie_title"
         android:layout_marginLeft="90dp"/>
 
