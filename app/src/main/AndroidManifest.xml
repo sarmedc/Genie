@@ -56,6 +56,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.streetrats.genie.MainActivity" />
         </activity>
+        <activity
+            android:name=".SelectItemMethod"
+            android:label="@string/title_activity_select_item_method"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.streetrats.genie.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

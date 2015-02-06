@@ -14,5 +14,6 @@
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="profile_name">John L.</string>
     <string name="title_activity_item_screen">ItemScreen</string>
+    <string name="title_activity_select_item_method">SelectItemMethod</string>
 
 </resources>
