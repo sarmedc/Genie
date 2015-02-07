@@ -15,5 +15,6 @@
     <string name="profile_name">John L.</string>
     <string name="title_activity_item_screen">ItemScreen</string>
     <string name="title_activity_select_item_method">SelectItemMethod</string>
+    <string name="title_activity_add_item">AddItem</string>
 
 </resources>

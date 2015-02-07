@@ -64,6 +64,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.streetrats.genie.MainActivity" />
         </activity>
+        <activity
+            android:name=".AddItem"
+            android:label="@string/title_activity_add_item"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.streetrats.genie.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
