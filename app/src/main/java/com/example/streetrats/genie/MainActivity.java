@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +18,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
     private UiLifecycleHelper uiHelper;
 
@@ -37,6 +39,8 @@ public class MainActivity extends FragmentActivity {
 
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
+
+        checkLogin();
 
         setContentView(R.layout.activity_main);
 
@@ -84,6 +88,8 @@ public class MainActivity extends FragmentActivity {
                 // If the session state is open:
                 // Show the authenticated fragment
                 showFragment(PROFILE, false);
+
+
             } else if (state.isClosed()) {
                 // If the session state is closed:
                 // Show the login fragment
@@ -117,6 +123,15 @@ public class MainActivity extends FragmentActivity {
                 }
             };
 
+    public void checkLogin() {
+        if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
+            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -133,8 +148,14 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        uiHelper.onActivityResult(requestCode, resultCode, data);
+        if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
+            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }
+        //super.onActivityResult(requestCode, resultCode, data);
+        //uiHelper.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -150,3 +171,21 @@ public class MainActivity extends FragmentActivity {
     }
 
 }
+
+
+
+/*
+ * Copyright 2012 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */

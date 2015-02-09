@@ -32,18 +32,34 @@
         android:layout_toRightOf="@+id/intro_hello"
         android:layout_toEndOf="@+id/intro_hello" />
 
+    <com.facebook.widget.LoginButton
+        android:id="@+id/authButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/user_name"
+        android:layout_centerHorizontal="true"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="130dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/authButton">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/theListView">
-
-        </ListView>
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="281dp"
+        android:id="@+id/theListView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </ListView>
+
 </RelativeLayout>
 
