@@ -17,4 +17,7 @@
     <string name="title_activity_select_item_method">SelectItemMethod</string>
     <string name="title_activity_add_item">AddItem</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
 </resources>

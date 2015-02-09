@@ -49,7 +49,7 @@
             android:value="@string/app_id" />
 
         <activity
-            android:name=".ItemScreen"
+            android:name=".ItemFragment"
             android:label="@string/title_activity_item_screen"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -57,7 +57,7 @@
                 android:value="com.example.streetrats.genie.MainActivity" />
         </activity>
         <activity
-            android:name=".SelectItemMethod"
+            android:name=".AddMethodFragment"
             android:label="@string/title_activity_select_item_method"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -65,7 +65,7 @@
                 android:value="com.example.streetrats.genie.MainActivity" />
         </activity>
         <activity
-            android:name=".AddItem"
+            android:name=".AddItemFragment"
             android:label="@string/title_activity_add_item"
             android:parentActivityName=".MainActivity" >
             <meta-data

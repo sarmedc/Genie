@@ -1,11 +1,16 @@
 package com.example.streetrats.genie;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -17,7 +22,10 @@ public class MainActivity extends FragmentActivity {
 
     private static final int LOGIN = 0;
     private static final int PROFILE = 1;
-    private static final int FRAGMENT_COUNT = PROFILE +1;
+    private static final int ITEM = 2;
+    private static final int ADD_ITEM = 3;
+    private static final int ADD_METHOD = 4;
+    private static final int FRAGMENT_COUNT = ADD_METHOD + 1;
 
     private boolean isResumed = false;
 
@@ -35,6 +43,9 @@ public class MainActivity extends FragmentActivity {
         FragmentManager fm = getSupportFragmentManager();
         fragments[LOGIN] = fm.findFragmentById(R.id.loginFragment);
         fragments[PROFILE] = fm.findFragmentById(R.id.profileFragment);
+        fragments[ITEM] = fm.findFragmentById(R.id.itemFragment);
+        fragments[ADD_ITEM] = fm.findFragmentById(R.id.addItemFragment);
+        fragments[ADD_METHOD] = fm.findFragmentById(R.id.addMethodFragment);
 
         FragmentTransaction transaction = fm.beginTransaction();
         for(int i = 0; i < fragments.length; i++) {

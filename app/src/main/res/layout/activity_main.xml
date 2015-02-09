@@ -13,4 +13,16 @@
         android:id="@+id/profileFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <fragment android:name="com.example.streetrats.genie.AddItemFragment"
+        android:id="@+id/addItemFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <fragment android:name="com.example.streetrats.genie.ItemFragment"
+        android:id="@+id/itemFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <fragment android:name="com.example.streetrats.genie.AddMethodFragment"
+        android:id="@+id/addMethodFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
