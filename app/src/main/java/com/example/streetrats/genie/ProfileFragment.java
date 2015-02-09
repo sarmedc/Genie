@@ -24,10 +24,10 @@ public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragment";
 
-    public void onCreate(Bundle savedInstanceState) {
+    /*public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -42,7 +42,6 @@ public class ProfileFragment extends Fragment {
                 if (session != null) {
                     if (!session.isClosed()) {
                         session.closeAndClearTokenInformation();
-                        session.setActiveSession(null);
                         Intent i = new Intent(getActivity(), MainActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         getActivity().startActivity(i);
@@ -61,7 +60,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    @Override
+    /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
         inflater.inflate(R.menu.menu_add_item, menu);
@@ -75,7 +74,7 @@ public class ProfileFragment extends Fragment {
                 break;
         }
         return true;
-    }
+    }*/
 
     /*public void callFacebookLogout(Context context) {
         Session session = Session.getActiveSession();

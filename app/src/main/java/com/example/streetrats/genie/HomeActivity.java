@@ -133,7 +133,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             Fragment fragment;
             Bundle args;
             switch (i) {
-                /*case 0:
+                case 0:
                     // The other sections of the app are dummy placeholders.
                     fragment = new DummySectionFragment();
                     args = new Bundle();
@@ -143,7 +143,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 case 1:
                     return new ItemFragment();
                 case 2:
-                    return new ProfileFragment();*/
+                    return new ProfileFragment();
                 default:
                     // The other sections of the app are dummy placeholders.
                     fragment = new DummySectionFragment();
