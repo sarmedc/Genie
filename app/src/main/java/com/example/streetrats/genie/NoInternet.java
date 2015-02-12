@@ -11,7 +11,7 @@ public class NoInternet extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_no_internet);
+        setContentView(R.layout.no_internet);
     }
 
 
