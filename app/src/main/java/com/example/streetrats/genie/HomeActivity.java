@@ -141,7 +141,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     fragment.setArguments(args);
                     return fragment;
                 case 1:
-                    return new ItemFragment();
+                    return new FriendFragment();
                 case 2:
                     return new ProfileFragment();
                 default:
