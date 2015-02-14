@@ -32,7 +32,7 @@
         android:layout_toRightOf="@+id/intro_hello"
         android:layout_toEndOf="@+id/intro_hello" />
 
-    <com.facebook.widget.LoginButton
+    <Button
         android:id="@+id/authButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +40,7 @@
         android:layout_marginTop="30dp"
         android:layout_below="@+id/user_name"
         android:layout_centerHorizontal="true"
+        android:text="@string/logoutBtn"
         />
 
     <LinearLayout

@@ -39,8 +39,11 @@ public class ProfileFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Session session = Session.getActiveSession();
+
                 if (session != null) {
+                    Log.d(TAG, "SESSION IS NOT NULL");
                     if (!session.isClosed()) {
+                        Log.d(TAG, "SESSION IS OPEN");
                         session.closeAndClearTokenInformation();
                         Intent i = new Intent(getActivity(), MainActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -60,7 +63,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    /*@Override
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
         inflater.inflate(R.menu.menu_add_item, menu);
@@ -74,7 +77,7 @@ public class ProfileFragment extends Fragment {
                 break;
         }
         return true;
-    }*/
+    }
 
     /*public void callFacebookLogout(Context context) {
         Session session = Session.getActiveSession();

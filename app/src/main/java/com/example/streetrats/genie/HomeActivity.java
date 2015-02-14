@@ -31,6 +31,8 @@ import com.facebook.UiLifecycleHelper;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener, android.support.v7.app.ActionBar.TabListener {
 
+    private static final String TAG = "HomeActivity";
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
      * three primary sections of the app. We use a {@link android.support.v4.app.FragmentPagerAdapter}
@@ -38,6 +40,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
      * intensive, it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     AppSectionsPagerAdapter mAppSectionsPagerAdapter;
+
+    private UiLifecycleHelper uiHelper;
+
+    private boolean isResumed = false;
 
     /**
      * The {@link ViewPager} that will display the three primary sections of the app, one at a
@@ -48,6 +54,24 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
+
+        Session session = Session.getActiveSession();
+
+        if (Session.getActiveSession() != null) {
+            Log.d(TAG, "SESSION IS NOT NULL");
+            if (!session.isClosed()) {
+                Log.d(TAG, "SESSION IS OPEN");
+            }
+            else {
+                Log.d(TAG, "SESSION IS CLOSED");
+            }
+        }
+        else {
+            Log.d(TAG, "SESSION IS NULL");
+        }
 
         setContentView(R.layout.home_activity);
 
@@ -86,6 +110,71 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+    }
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        // Only make changes if the activity is visible
+        if (isResumed) {
+            if (session == null || state.isClosed()) {
+                // If the session state is closed:
+                // Show the authenticated fragment
+                Intent i = new Intent(HomeActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("fb_session", session);
+                startActivity(i);
+                finish();
+            } else if (state.isOpened()) {
+                // If the session state is open:
+            }
+        }
+    }
+
+    private Session.StatusCallback callback =
+            new Session.StatusCallback() {
+                @Override
+                public void call(Session session,
+                                 SessionState state, Exception exception) {
+                    onSessionStateChange(session, state, exception);
+                    // checkLoggedIn();
+                }
+            };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+        isResumed = true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+        isResumed = false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getActiveSession() == null || Session.getActiveSession().isClosed()){
+            Intent i = new Intent(HomeActivity.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+        uiHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
     }
 
     @Override

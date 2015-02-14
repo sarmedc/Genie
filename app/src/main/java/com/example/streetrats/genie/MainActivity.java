@@ -20,18 +20,20 @@ import com.facebook.UiLifecycleHelper;
 
 public class MainActivity extends ActionBarActivity {
 
+    private static final String TAG = "MainActivity";
+
     private UiLifecycleHelper uiHelper;
 
-    private static final int LOGIN = 0;
+    private boolean isResumed = false;
+
+    /*private static final int LOGIN = 0;
     private static final int PROFILE = 1;
     private static final int ITEM = 2;
     private static final int ADD_ITEM = 3;
     private static final int ADD_METHOD = 4;
     private static final int FRAGMENT_COUNT = ADD_METHOD + 1;
 
-    private boolean isResumed = false;
-
-    private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
+    private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,11 @@ public class MainActivity extends ActionBarActivity {
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
 
-        checkLogin();
+        checkLoggedIn();
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
-        FragmentManager fm = getSupportFragmentManager();
+        /*FragmentManager fm = getSupportFragmentManager();
         fragments[LOGIN] = fm.findFragmentById(R.id.loginFragment);
         fragments[PROFILE] = fm.findFragmentById(R.id.profileFragment);
         fragments[ITEM] = fm.findFragmentById(R.id.itemFragment);
@@ -55,10 +57,10 @@ public class MainActivity extends ActionBarActivity {
         for(int i = 0; i < fragments.length; i++) {
             transaction.hide(fragments[i]);
         }
-        transaction.commit();
+        transaction.commit();*/
     }
 
-    private void showFragment(int fragmentIndex, boolean addToBackStack) {
+    /*private void showFragment(int fragmentIndex, boolean addToBackStack) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         for (int i = 0; i < fragments.length; i++) {
@@ -72,33 +74,26 @@ public class MainActivity extends ActionBarActivity {
             transaction.addToBackStack(null);
         }
         transaction.commit();
-    }
+    }*/
 
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         // Only make changes if the activity is visible
         if (isResumed) {
-            FragmentManager manager = getSupportFragmentManager();
-            // Get the number of entries in the back stack
-            int backStackSize = manager.getBackStackEntryCount();
-            // Clear the back stack
-            for (int i = 0; i < backStackSize; i++) {
-                manager.popBackStack();
-            }
             if (state.isOpened()) {
                 // If the session state is open:
                 // Show the authenticated fragment
-                showFragment(PROFILE, false);
-
-
+                Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
             } else if (state.isClosed()) {
                 // If the session state is closed:
                 // Show the login fragment
-                showFragment(LOGIN, false);
             }
         }
     }
 
-    @Override
+    /*@Override
     protected void onResumeFragments() {
         super.onResumeFragments();
         Session session = Session.getActiveSession();
@@ -112,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
             // and ask the person to login.
             showFragment(LOGIN, false);
         }
-    }
+    }*/
 
     private Session.StatusCallback callback =
             new Session.StatusCallback() {
@@ -120,15 +115,21 @@ public class MainActivity extends ActionBarActivity {
                 public void call(Session session,
                                  SessionState state, Exception exception) {
                     onSessionStateChange(session, state, exception);
+                   // checkLoggedIn();
                 }
             };
 
-    public void checkLogin() {
-        if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
+    public void checkLoggedIn() {
+        Session session = Session.getActiveSession();
+
+        if (Session.getActiveSession() != null && Session.getActiveSession().isOpened()) {
             Intent i = new Intent(MainActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
+        }
+        else {
+            Log.d(TAG, "SESSION IS NULL OR CLOSED");
         }
     }
 
@@ -154,8 +155,8 @@ public class MainActivity extends ActionBarActivity {
             startActivity(i);
             finish();
         }
-        //super.onActivityResult(requestCode, resultCode, data);
-        //uiHelper.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        uiHelper.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
