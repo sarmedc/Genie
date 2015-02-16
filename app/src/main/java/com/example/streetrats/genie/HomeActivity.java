@@ -3,12 +3,10 @@ package com.example.streetrats.genie;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,39 +15,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.streetrats.genie.ItemFragment;
-import com.example.streetrats.genie.ProfileFragment;
-import com.example.streetrats.genie.R;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener, android.support.v7.app.ActionBar.TabListener {
 
     private static final String TAG = "HomeActivity";
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
-     * three primary sections of the app. We use a {@link android.support.v4.app.FragmentPagerAdapter}
-     * derivative, which will keep every loaded fragment in memory. If this becomes too memory
-     * intensive, it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 
     private UiLifecycleHelper uiHelper;
 
     private boolean isResumed = false;
 
-    /**
-     * The {@link ViewPager} that will display the three primary sections of the app, one at a
-     * time.
-     */
     ViewPager mViewPager;
+
+    RestClient restClient;
+    GenieService genieService;
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +49,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         uiHelper.onCreate(savedInstanceState);
 
         Session session = Session.getActiveSession();
+
+        Log.d(TAG, session.getAccessToken());
 
         if (Session.getActiveSession() != null) {
             Log.d(TAG, "SESSION IS NOT NULL");
@@ -72,6 +64,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         else {
             Log.d(TAG, "SESSION IS NULL");
         }
+
+        restClient = new RestClient();
+        genieService = restClient.getGenieService();
+        getUserInfo();
 
         setContentView(R.layout.home_activity);
 
@@ -110,6 +106,29 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+    }
+
+    public void getUserInfo() {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+        genieService.getUser(new UserRequest(Session.getActiveSession().getAccessToken()), new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                System.out.println("User Name: " + user.user);
+                System.out.println("User Access Token: " + user.access_token);
+                System.out.println("User ID: " + user._id);
+                for(int i = 0; i < user.friends.size(); i++) {
+                    System.out.println("User Friend: " + user.friends.get(i));
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println(retrofitError.getMessage());
+            }
+        });
+
     }
 
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
