@@ -52,27 +52,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a94e565-2840-4238-b7f3-d893be93fec0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/home_landing.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/test.xml" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\appcompat_v7_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\bolts_android_1_1_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\cardview_v7_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\facebook_android_sdk_3_23_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\okhttp_2_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\okhttp_urlconnection_2_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\okio_1_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\recyclerview_v7_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\support_annotations_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Scott Upton\AndroidStudioProjects\Genie\Genie\.idea\libraries\support_v4_21_0_3.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/genie_white.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/genie_white.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Genie.iws" />
@@ -1592,7 +1571,11 @@
       <created>1423950706626</created>
       <updated>1423950706626</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Changed icons">
+      <created>1424806814510</created>
+      <updated>1424806814510</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1678,7 +1661,8 @@
     <MESSAGE value="Showing Some Fragments as an Example" />
     <MESSAGE value="added friend search page" />
     <MESSAGE value="Facebook login bugs fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Facebook login bugs fixed" />
+    <MESSAGE value="Changed icons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed icons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
