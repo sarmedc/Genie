@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme" >
 
         <uses-sdk
-            android:minSdkVersion="9"
+            android:minSdkVersion="14"
             android:targetSdkVersion="16" />
 
         <activity

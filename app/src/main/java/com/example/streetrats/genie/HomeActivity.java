@@ -243,11 +243,12 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             switch (i) {
                 case 0:
                     // The other sections of the app are dummy placeholders.
-                    fragment = new DummySectionFragment();
+                    return new HomeFragment();
+                    /*fragment = new DummySectionFragment();
                     args = new Bundle();
                     args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
                     fragment.setArguments(args);
-                    return fragment;
+                    return fragment;*/
                 case 1:
                     return new FriendFragment();
                 case 2:

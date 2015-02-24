@@ -11,6 +11,7 @@
         android:layout_width="400px"
         android:layout_height="400px"
         android:id="@+id/genie_lamp"
+        android:background ="@drawable/rounded_edittext"
         android:src="@drawable/genie_black"
         android:layout_below="@+id/itemName"
         android:layout_centerHorizontal="true" />
@@ -30,31 +31,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@drawable/rounded_edittext"
         android:text="Item Description. This is where the item is described with attributes like color, build material, etc."
         android:id="@+id/itemDescription"
         android:layout_below="@+id/genie_lamp"
-        android:layout_marginTop="41dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@drawable/rounded_edittext"
         android:text="$Price$"
         android:id="@+id/itemPrice"
         android:layout_below="@+id/itemDescription"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="47dp"
+        android:layout_alignRight="@+id/Buybutton"
+        android:layout_alignEnd="@+id/Buybutton"
+        android:layout_alignLeft="@+id/Buybutton"
+        android:layout_alignStart="@+id/Buybutton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buy"
-        android:id="@+id/button"
+        android:id="@+id/Buybutton"
         android:background="@drawable/rounded_buttons"
-        android:layout_below="@+id/itemPrice"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -62,9 +68,9 @@
         android:text="Next"
         android:id="@+id/nextButton"
         android:background="@drawable/rounded_buttons"
-        android:layout_alignTop="@+id/button"
-        android:layout_toRightOf="@+id/itemName"
-        android:layout_toEndOf="@+id/itemName" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,8 +78,8 @@
         android:text="Previous"
         android:id="@+id/previousButton"
         android:background="@drawable/rounded_buttons"
-        android:layout_alignTop="@+id/button"
-        android:layout_toLeftOf="@+id/itemName"
-        android:layout_toStartOf="@+id/itemName" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
