@@ -40,9 +40,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a94e565-2840-4238-b7f3-d893be93fec0" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\delia\AndroidStudioProjects\Genie\app\src\main\res\layout-v11\activity_browsefriends.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_browsefriends.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_browsefriends.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Genie.iws" />
@@ -1424,7 +1421,11 @@
       <created>1424375909044</created>
       <updated>1424375909044</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="deleted extra friends page">
+      <created>1424808504048</created>
+      <updated>1424808504048</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1511,7 +1512,8 @@
     <MESSAGE value="added friend search page" />
     <MESSAGE value="Facebook login bugs fixed" />
     <MESSAGE value="dummy logout in menu, locked all currently displayed pages to portrait mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="dummy logout in menu, locked all currently displayed pages to portrait mode" />
+    <MESSAGE value="deleted extra friends page" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleted extra friends page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
