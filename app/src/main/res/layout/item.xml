@@ -8,11 +8,10 @@
     android:background="@color/blue">
 
     <ImageView
-        android:layout_width="400px"
-        android:layout_height="400px"
+        android:layout_width="500px"
+        android:layout_height="500px"
         android:id="@+id/genie_lamp"
-        android:background ="@drawable/rounded_edittext"
-        android:src="@drawable/genie_black"
+        android:src="@drawable/genie_white_normal"
         android:layout_below="@+id/itemName"
         android:layout_centerHorizontal="true" />
 
@@ -31,23 +30,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:background="@drawable/rounded_edittext"
         android:text="Item Description. This is where the item is described with attributes like color, build material, etc."
+        android:textColor="#ffffff"
         android:id="@+id/itemDescription"
+        android:layout_marginTop="48dp"
         android:layout_below="@+id/genie_lamp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="41dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:background="@drawable/rounded_edittext"
-        android:text="$Price$"
+        android:text="Price"
         android:id="@+id/itemPrice"
         android:layout_below="@+id/itemDescription"
         android:layout_marginTop="47dp"
+        android:gravity="center"
         android:layout_alignRight="@+id/Buybutton"
         android:layout_alignEnd="@+id/Buybutton"
         android:layout_alignLeft="@+id/Buybutton"
