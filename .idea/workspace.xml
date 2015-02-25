@@ -39,7 +39,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.streetrats.genie" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a94e565-2840-4238-b7f3-d893be93fec0" name="Default" comment="">
+    <list default="true" id="4a94e565-2840-4238-b7f3-d893be93fec0" name="Default" comment="What">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Genie.iws" />
@@ -146,8 +147,8 @@
       <file leaf-file-name="ProfileFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25862068" vertical-offset="600" max-vertical-offset="1635">
-              <caret line="68" column="2" selection-start-line="68" selection-start-column="2" selection-end-line="68" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.12738854" vertical-offset="0" max-vertical-offset="1620">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1239,7 +1240,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/FriendFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/row_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/RestClient.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/GenieService.java" />
@@ -1256,6 +1256,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_browsefriends.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-v11/activity_browsefriends.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java" />
       </list>
     </option>
   </component>
@@ -1912,7 +1913,11 @@
       <created>1424904132833</created>
       <updated>1424904132833</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fixed HomeActivity bug">
+      <created>1424904170679</created>
+      <updated>1424904170679</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1951,8 +1956,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280543" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3808933" sideWeight="0.642246" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38957816" sideWeight="0.7970852" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3808933" sideWeight="0.642246" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38957816" sideWeight="0.7970852" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287841" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24879615" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2002,7 +2007,8 @@
     <MESSAGE value="deleted extra friends page" />
     <MESSAGE value="Added more things" />
     <MESSAGE value="Fixed HomeActivity bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed HomeActivity bug" />
+    <MESSAGE value="What" />
+    <option name="LAST_COMMIT_MESSAGE" value="What" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2430,8 +2436,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25862068" vertical-offset="600" max-vertical-offset="1635">
-          <caret line="68" column="2" selection-start-line="68" selection-start-column="2" selection-end-line="68" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.12738854" vertical-offset="0" max-vertical-offset="1620">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -1,6 +1,5 @@
 package com.example.streetrats.genie;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,12 +16,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
 
-/**
- * Created by saif on 2/5/2015.
- */
+
 public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragment";
@@ -72,6 +67,7 @@ public class ProfileFragment extends Fragment {
         radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
         radioButton = (RadioButton) view.findViewById(R.id.btnFile);
         radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+
 
         return view;
     }
