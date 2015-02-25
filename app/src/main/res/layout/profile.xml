@@ -1,5 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height= "match_parent">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -62,41 +67,43 @@
 
     </ListView>
 
-    <RadioGroup
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@drawable/navbar_background"
-        >
-        <RadioButton
-            android:id="@+id/btnAll"
-            style="@style/navbar_button"
-            android:drawableTop="@drawable/navbar_allselector"
-            android:text="All"
-            />
-        <RadioButton
-            android:id="@+id/btnPicture"
-            style="@style/navbar_button"
-            android:drawableTop="@drawable/navbar_pictureselector"
-            android:text="Pictures"
-            android:layout_marginLeft="5dp"
-            android:checked="false" />
-        <RadioButton
-            android:id="@+id/btnVideo"
-            style="@style/navbar_button"
-            android:drawableTop="@drawable/navbar_videoselector"
-            android:text="Videos"
-            android:layout_marginLeft="5dp"
-            />
-        <RadioButton
-            android:id="@+id/btnFile"
-            style="@style/navbar_button"
-            android:drawableTop="@drawable/navbar_fileselector"
-            android:text="Files"
-            android:layout_marginLeft="5dp"
-            />
-    </RadioGroup>
+
 
 </RelativeLayout>
 
+<RadioGroup
+android:layout_width="fill_parent"
+android:layout_height="60dp"
+android:layout_alignParentBottom="true"
+android:orientation="horizontal"
+android:background="@drawable/navbar_background"
+    >
+<RadioButton
+    android:id="@+id/btnAll"
+    style="@style/navbar_button"
+    android:drawableTop="@drawable/navbar_allselector"
+    android:text="All"
+    />
+<RadioButton
+    android:id="@+id/btnPicture"
+    style="@style/navbar_button"
+    android:drawableTop="@drawable/navbar_pictureselector"
+    android:text="Pictures"
+    android:layout_marginLeft="5dp"
+    android:checked="false" />
+<RadioButton
+    android:id="@+id/btnVideo"
+    style="@style/navbar_button"
+    android:drawableTop="@drawable/navbar_videoselector"
+    android:text="Videos"
+    android:layout_marginLeft="5dp"
+    />
+<RadioButton
+    android:id="@+id/btnFile"
+    style="@style/navbar_button"
+    android:drawableTop="@drawable/navbar_fileselector"
+    android:text="Files"
+    android:layout_marginLeft="5dp"
+    />
+</RadioGroup>
+</RelativeLayout>

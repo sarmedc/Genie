@@ -74,9 +74,9 @@ public class ProfileFragment extends Fragment {
 
     private CompoundButton.OnCheckedChangeListener btnNavBarOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
+            /*if (isChecked) {
                 Toast.makeText(getActivity(), buttonView.getText(), Toast.LENGTH_SHORT).show();
-            }
+            }*/
         }
     };
 
