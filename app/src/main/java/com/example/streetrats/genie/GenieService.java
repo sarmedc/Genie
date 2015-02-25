@@ -12,4 +12,3 @@ public interface GenieService {
     @POST("/api/user")
     void getUser(@Body UserRequest body, Callback<User> callBack);
 }
-

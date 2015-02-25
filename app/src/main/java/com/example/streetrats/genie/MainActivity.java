@@ -1,18 +1,9 @@
 package com.example.streetrats.genie;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -115,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
                 public void call(Session session,
                                  SessionState state, Exception exception) {
                     onSessionStateChange(session, state, exception);
-                   // checkLoggedIn();
+                    // checkLoggedIn();
                 }
             };
 

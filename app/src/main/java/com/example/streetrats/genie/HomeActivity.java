@@ -15,10 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -109,25 +106,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
-
-        RadioButton radioButton;
-        radioButton = (RadioButton) findViewById(R.id.btnAll);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-        radioButton = (RadioButton) findViewById(R.id.btnPicture);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-        radioButton = (RadioButton) findViewById(R.id.btnVideo);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-        radioButton = (RadioButton) findViewById(R.id.btnFile);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
     }
-
-    private CompoundButton.OnCheckedChangeListener btnNavBarOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                Toast.makeText(HomeActivity.this, buttonView.getText(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
 
     public void getUserInfo() {
         if(restClient == null || genieService == null) {
@@ -136,9 +115,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         genieService.getUser(new UserRequest(Session.getActiveSession().getAccessToken()), new Callback<User>() {
             @Override
             public void success(User user, Response response) {
-                System.out.println("User Name: " + user.user);
-                System.out.println("User Access Token: " + user.access_token);
+                System.out.println("User Name: " + user.first_name + " " + user.last_name);
                 System.out.println("User ID: " + user._id);
+                System.out.println("User FB ID: " + user.fb_id);
                 for(int i = 0; i < user.friends.size(); i++) {
                     System.out.println("User Friend: " + user.friends.get(i));
                 }
