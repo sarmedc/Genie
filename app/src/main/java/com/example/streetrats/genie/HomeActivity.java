@@ -15,7 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -106,7 +109,25 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        RadioButton radioButton;
+        radioButton = (RadioButton) findViewById(R.id.btnAll);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+        radioButton = (RadioButton) findViewById(R.id.btnPicture);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+        radioButton = (RadioButton) findViewById(R.id.btnVideo);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+        radioButton = (RadioButton) findViewById(R.id.btnFile);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
     }
+
+    private CompoundButton.OnCheckedChangeListener btnNavBarOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                Toast.makeText(HomeActivity.this, buttonView.getText(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     public void getUserInfo() {
         if(restClient == null || genieService == null) {

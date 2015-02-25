@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -24,10 +27,10 @@ public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragment";
 
-    /*public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }*/
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -60,8 +63,26 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        RadioButton radioButton;
+        radioButton = (RadioButton) view.findViewById(R.id.btnAll);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+        radioButton = (RadioButton) view.findViewById(R.id.btnPicture);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+        radioButton = (RadioButton)view.findViewById(R.id.btnVideo);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+        radioButton = (RadioButton) view.findViewById(R.id.btnFile);
+        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+
         return view;
     }
+
+    private CompoundButton.OnCheckedChangeListener btnNavBarOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                Toast.makeText(getActivity(), buttonView.getText(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
