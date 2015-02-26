@@ -40,7 +40,7 @@
             <solid android:color="#000000" />
 		</shape>
 	</item>
-	<item android:bottom="35dip">
+	<item android:bottom="0dip">
 		<shape>
 			<gradient 
                 android:startColor="#2c2c2c"

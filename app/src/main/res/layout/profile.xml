@@ -11,99 +11,82 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.streetrats.genie.HomeScreen"
+    android:layout_above="@+id/radioGroup"
+    android:background="@color/blue"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Hello,"
-        android:id="@+id/intro_hello"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Hello,"
+            android:id="@+id/intro_hello"
+            android:textColor="@color/white"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/profile_name"
-        android:textSize="64dp"
-        android:textColor="@color/blue"
-        android:id="@+id/user_name"
-        android:layout_below="@+id/intro_hello"
-        android:layout_toRightOf="@+id/intro_hello"
-        android:layout_toEndOf="@+id/intro_hello" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/profile_name"
+            android:textSize="64dp"
+            android:textColor="@color/white"
+            android:id="@+id/user_name"
+            android:layout_below="@+id/intro_hello"
+            android:layout_toRightOf="@+id/intro_hello"
+            android:layout_toEndOf="@+id/intro_hello" />
 
-    <Button
-        android:id="@+id/authButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/user_name"
-        android:layout_centerHorizontal="true"
-        android:text="@string/logoutBtn"
-        />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userProductListView"
+            android:layout_below="@+id/user_name"
+            android:layout_alignLeft="@+id/intro_hello"
+            android:layout_alignStart="@+id/intro_hello"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="130dp"
-        android:orientation="vertical"
-        android:layout_below="@+id/authButton">
+    </RelativeLayout>
 
-    </LinearLayout>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="281dp"
-        android:id="@+id/theListView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-    </ListView>
-
-
-
-</RelativeLayout>
-
-<RadioGroup
-android:layout_width="fill_parent"
-android:layout_height="60dp"
-android:layout_alignParentBottom="true"
-android:orientation="horizontal"
-android:background="@drawable/navbar_background"
-    >
-<RadioButton
-    android:id="@+id/btnAll"
-    style="@style/navbar_button"
-    android:drawableTop="@drawable/navbar_allselector"
-    android:text="All"
-    />
-<RadioButton
-    android:id="@+id/btnPicture"
-    style="@style/navbar_button"
-    android:drawableTop="@drawable/navbar_pictureselector"
-    android:text="Pictures"
-    android:layout_marginLeft="5dp"
-    android:checked="false" />
-<RadioButton
-    android:id="@+id/btnVideo"
-    style="@style/navbar_button"
-    android:drawableTop="@drawable/navbar_videoselector"
-    android:text="Videos"
-    android:layout_marginLeft="5dp"
-    />
-<RadioButton
-    android:id="@+id/btnFile"
-    style="@style/navbar_button"
-    android:drawableTop="@drawable/navbar_fileselector"
-    android:text="Files"
-    android:layout_marginLeft="5dp"
-    />
-</RadioGroup>
+    <RadioGroup
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:background="@drawable/navbar_background"
+        android:id="@+id/radioGroup">
+        <RadioButton
+            android:id="@+id/btnAll"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/navbar_allselector"
+            android:text="All"
+            />
+        <RadioButton
+            android:id="@+id/btnPicture"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/navbar_pictureselector"
+            android:text="Pictures"
+            android:layout_marginLeft="5dp"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnVideo"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/navbar_videoselector"
+            android:text="Videos"
+            android:layout_marginLeft="5dp"
+            />
+        <RadioButton
+            android:id="@+id/btnFile"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/navbar_fileselector"
+            android:text="Files"
+            android:layout_marginLeft="5dp"
+            />
+    </RadioGroup>
 </RelativeLayout>
