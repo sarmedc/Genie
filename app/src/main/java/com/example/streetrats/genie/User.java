@@ -11,5 +11,6 @@ public class User {
     String last_name;
     String gender;
     String fb_id;
+    String image;
     List<String> friends;
 }

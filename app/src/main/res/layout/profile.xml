@@ -42,6 +42,16 @@
             android:layout_toRightOf="@+id/intro_hello"
             android:layout_toEndOf="@+id/intro_hello" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loader_name"
+            android:layout_alignTop="@+id/intro_hello"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/intro_hello"
+            android:layout_toRightOf="@+id/intro_hello"
+            android:layout_toEndOf="@+id/intro_hello" />
+
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,6 +61,7 @@
             android:layout_alignStart="@+id/intro_hello"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
 
     </RelativeLayout>
 

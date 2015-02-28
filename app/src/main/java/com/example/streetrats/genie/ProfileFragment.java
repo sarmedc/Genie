@@ -53,9 +53,7 @@ public class ProfileFragment extends Fragment {
         getUserInfo(view);
 
         ListAdapter theAdapter = new MyAdapter(getActivity(), items);
-
         ListView theListView = (ListView) view.findViewById(R.id.userProductListView);
-
         theListView.setAdapter(theAdapter);
 
         RadioButton radioButton;
