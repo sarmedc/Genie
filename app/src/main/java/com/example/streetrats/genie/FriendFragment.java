@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.streetrats.genie.rest.GenieService;
+import com.example.streetrats.genie.rest.RestClient;
+import com.example.streetrats.genie.rest.User;
 import com.facebook.Session;
 
 import java.util.ArrayList;
@@ -57,12 +60,6 @@ public class FriendFragment extends Fragment {
         ListView theListView = (ListView) view.findViewById(R.id.friendProductListView);
 
         theListView.setAdapter(adapter);
-
-        User placeholder = new User();
-        placeholder.first_name = "No Friends";
-        userArray.clear();
-        userArray.add(placeholder);
-        adapter.notifyDataSetChanged();
 
         getFriends(view, adapter);
 

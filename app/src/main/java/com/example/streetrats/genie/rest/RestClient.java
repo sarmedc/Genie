@@ -1,9 +1,8 @@
-package com.example.streetrats.genie;
+package com.example.streetrats.genie.rest;
 
-import com.example.streetrats.genie.GenieService;
+import com.example.streetrats.genie.rest.GenieService;
 
 import retrofit.RestAdapter;
-import retrofit.client.OkClient;
 
 public class RestClient
 {

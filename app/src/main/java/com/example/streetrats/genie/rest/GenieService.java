@@ -1,4 +1,4 @@
-package com.example.streetrats.genie;
+package com.example.streetrats.genie.rest;
 
 
 import java.util.List;
@@ -19,5 +19,9 @@ public interface GenieService {
     @Headers("Content-Type: application/json")
     @GET("/api/user/{access_token}/friends")
     void getFriends(@Path("access_token") String access_token, Callback<List<User>> callback);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/products/{access_token}")
+    void getProducts(@Path("access_token") String access_token, Callback<List<Product>> callback);
 
 }

@@ -11,12 +11,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.streetrats.genie.rest.GenieService;
+import com.example.streetrats.genie.rest.Product;
+import com.example.streetrats.genie.rest.RestClient;
+import com.example.streetrats.genie.rest.User;
+import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -30,11 +37,13 @@ public class ProfileFragment extends Fragment {
     RestClient restClient;
     GenieService genieService;
 
-    private final String[] items = { "Android", "iPhone", "WindowsMobile",
+    /*private final String[] items = { "Android", "iPhone", "WindowsMobile",
             "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
             "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
             "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-            "Android", "iPhone", "WindowsMobile" };
+            "Android", "iPhone", "WindowsMobile" };*/
+
+    ArrayList<Product> productArray = new ArrayList<Product>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +61,11 @@ public class ProfileFragment extends Fragment {
 
         getUserInfo(view);
 
-        ListAdapter theAdapter = new MyAdapter(getActivity(), items);
+        ProductsAdapter adapter = new ProductsAdapter(getActivity(), productArray);
         ListView theListView = (ListView) view.findViewById(R.id.userProductListView);
-        theListView.setAdapter(theAdapter);
+        theListView.setAdapter(adapter);
+
+        getProducts(view, adapter);
 
         RadioButton radioButton;
         radioButton = (RadioButton) view.findViewById(R.id.btnAll);
@@ -133,6 +144,31 @@ public class ProfileFragment extends Fragment {
                 }
                 TextView name = (TextView) view.findViewById(R.id.user_name);
                 name.setText(user.first_name + " " + user.last_name.charAt(0) + ".");
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println(retrofitError.getMessage());
+            }
+        });
+
+    }
+
+    public void getProducts(final View view, final ProductsAdapter adapter) {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+        genieService.getProducts(Session.getActiveSession().getAccessToken().toString(), new Callback<List<Product>>() {
+            @Override
+            public void success(List<Product> products, Response response) {
+                Log.d(TAG, "" + products.size());
+                if (products.size() != 0) {
+                    productArray.clear();
+                    for (int i = 0; i < products.size(); i++) {
+                        productArray.add(products.get(i));
+                    }
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
