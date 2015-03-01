@@ -21,7 +21,11 @@ public interface GenieService {
     void getFriends(@Path("access_token") String access_token, Callback<List<User>> callback);
 
     @Headers("Content-Type: application/json")
-    @GET("/api/products/{access_token}")
-    void getProducts(@Path("access_token") String access_token, Callback<List<Product>> callback);
+    @GET("/api/user/{access_token}/products")
+    void getMyProducts(@Path("access_token") String access_token, Callback<List<Product>> callback);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/user/{access_token}/friends/products")
+    void getFriendsProducts(@Path("access_token") String access_token, Callback<List<Product>> callback);
 
 }

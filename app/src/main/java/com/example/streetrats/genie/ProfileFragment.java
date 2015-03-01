@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment {
         ListView theListView = (ListView) view.findViewById(R.id.userProductListView);
         theListView.setAdapter(adapter);
 
-        getProducts(view, adapter);
+        getMyProducts(view, adapter);
 
         RadioButton radioButton;
         radioButton = (RadioButton) view.findViewById(R.id.btnAll);
@@ -154,11 +154,11 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    public void getProducts(final View view, final ProductsAdapter adapter) {
+    public void getMyProducts(final View view, final ProductsAdapter adapter) {
         if(restClient == null || genieService == null) {
             return;
         }
-        genieService.getProducts(Session.getActiveSession().getAccessToken().toString(), new Callback<List<Product>>() {
+        genieService.getMyProducts(Session.getActiveSession().getAccessToken().toString(), new Callback<List<Product>>() {
             @Override
             public void success(List<Product> products, Response response) {
                 Log.d(TAG, "" + products.size());
