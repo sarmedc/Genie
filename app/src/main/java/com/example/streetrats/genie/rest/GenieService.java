@@ -28,4 +28,8 @@ public interface GenieService {
     @GET("/api/user/{access_token}/friends/products")
     void getFriendsProducts(@Path("access_token") String access_token, Callback<List<Product>> callback);
 
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/products")
+    void addProduct(@Body AddProductRequest body, Callback<Product> callback);
+
 }

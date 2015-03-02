@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
     GenieService genieService;
 
     ArrayList<Product> productArray = new ArrayList<Product>();
+    ProductsAdapter adapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +54,21 @@ public class HomeFragment extends Fragment {
 
         getUserInfo(view);
 
-        ProductsAdapter adapter = new ProductsAdapter(getActivity(), productArray);
+        adapter = new ProductsAdapter(getActivity(), productArray);
         ListView theListView = (ListView) view.findViewById(R.id.friendsProductListView);
         theListView.setAdapter(adapter);
+
+        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3) {
+                Product product = (Product) adapter.getItemAtPosition(position);
+
+                Intent intent = new Intent(getActivity(), ItemDetail.class);
+                intent.putExtra("PRODUCT", product);
+                intent.putExtra("PARENT_ACTIVITY", "HomeFragment");
+                startActivity(intent);
+            }
+        });
 
         getFriendsProducts(view, adapter);
 
@@ -64,15 +78,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_home, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                break;
             case R.id.action_logout:
                 facebookLogout();
                 break;
@@ -148,7 +160,6 @@ public class HomeFragment extends Fragment {
                 System.out.println(retrofitError.getMessage());
             }
         });
-
     }
 }
 

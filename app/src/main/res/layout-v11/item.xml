@@ -77,8 +77,7 @@
         android:gravity="center"
         android:layout_below="@+id/item_scroll"
         android:layout_centerHorizontal="true"/>
-
-
+    
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

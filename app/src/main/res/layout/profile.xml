@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/userProductListView"
             android:layout_below="@+id/user_name"
+            android:layout_marginBottom="10dp"
             android:layout_alignLeft="@+id/intro_hello"
             android:layout_alignStart="@+id/intro_hello"
             android:layout_alignParentRight="true"

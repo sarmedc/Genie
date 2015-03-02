@@ -28,6 +28,8 @@ import retrofit.client.Response;
 public class FriendFragment extends Fragment {
 
     private static final String TAG = "FriendFragment";
+    private static final int RESULT_OK = 1;
+    private static final int RESULT_CANCELED = 0;
 
     RestClient restClient;
     GenieService genieService;
@@ -39,6 +41,7 @@ public class FriendFragment extends Fragment {
             "Android", "iPhone", "WindowsMobile" };*/
 
     ArrayList<User> userArray = new ArrayList<User>();
+    UsersAdapter adapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +58,7 @@ public class FriendFragment extends Fragment {
         genieService = restClient.getGenieService();
 
         /*ListAdapter theAdapter = new MyAdapter(getActivity(), items);*/
-        UsersAdapter adapter = new UsersAdapter(getActivity(), userArray);
+        adapter = new UsersAdapter(getActivity(), userArray);
 
         ListView theListView = (ListView) view.findViewById(R.id.friendProductListView);
 
@@ -69,14 +72,16 @@ public class FriendFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_friends, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_barcode:
+                Intent intent = new Intent(getActivity(), SimpleScannerActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.action_logout:
                 facebookLogout();

@@ -26,7 +26,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/genie_lamp"
+        android:id="@+id/item_image"
         android:src="@drawable/genie_white_normal"
         android:layout_below="@+id/genie_title"
         android:layout_marginLeft="90dp"/>
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/genie_lamp"
+        android:layout_below="@+id/item_image"
         android:layout_centerHorizontal="true"
         />
 
