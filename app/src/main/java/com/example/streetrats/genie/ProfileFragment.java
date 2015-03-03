@@ -10,13 +10,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.streetrats.genie.rest.AddProductRequest;
+import com.example.streetrats.genie.rest.GenieService;
+import com.example.streetrats.genie.rest.Product;
+import com.example.streetrats.genie.rest.RestClient;
+import com.example.streetrats.genie.rest.User;
+import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -26,15 +35,20 @@ import retrofit.client.Response;
 public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragment";
+    private static final int RESULT_OK = 1;
+    private static final int RESULT_CANCELED = 0;
 
     RestClient restClient;
     GenieService genieService;
 
-    private final String[] items = { "Android", "iPhone", "WindowsMobile",
+    /*private final String[] items = { "Android", "iPhone", "WindowsMobile",
             "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
             "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
             "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-            "Android", "iPhone", "WindowsMobile" };
+            "Android", "iPhone", "WindowsMobile" };*/
+
+    ArrayList<Product> productArray = new ArrayList<Product>();
+    ProductsAdapter adapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +66,23 @@ public class ProfileFragment extends Fragment {
 
         getUserInfo(view);
 
-        ListAdapter theAdapter = new MyAdapter(getActivity(), items);
-
+        adapter = new ProductsAdapter(getActivity(), productArray);
         ListView theListView = (ListView) view.findViewById(R.id.userProductListView);
+        theListView.setAdapter(adapter);
 
-        theListView.setAdapter(theAdapter);
+        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3) {
+               Product product = (Product) adapter.getItemAtPosition(position);
+
+               Intent intent = new Intent(getActivity(), ItemDetail.class);
+               intent.putExtra("PRODUCT", product);
+                intent.putExtra("PARENT_ACTIVITY", "ProfileFragment");
+               startActivity(intent);
+            }
+        });
+
+        getMyProducts(view, adapter);
 
         RadioButton radioButton;
         radioButton = (RadioButton) view.findViewById(R.id.btnAll);
@@ -83,14 +109,16 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_profile, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_barcode:
+                Intent intent = new Intent(getActivity(), SimpleScannerActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.action_logout:
                 facebookLogout();
@@ -144,5 +172,65 @@ public class ProfileFragment extends Fragment {
         });
 
     }
+
+    public void getMyProducts(final View view, final ProductsAdapter adapter) {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+        genieService.getMyProducts(Session.getActiveSession().getAccessToken().toString(), new Callback<List<Product>>() {
+            @Override
+            public void success(List<Product> products, Response response) {
+                Log.d(TAG, "" + products.size());
+                if (products.size() != 0) {
+                    productArray.clear();
+                    for (int i = 0; i < products.size(); i++) {
+                        System.out.println(products.get(i).features);
+                        productArray.add(products.get(i));
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println(retrofitError.getMessage());
+            }
+        });
+
+    }
+
+    public void addProduct(final String upc) {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+        genieService.addProduct(new AddProductRequest(upc, Session.getActiveSession().getAccessToken()), new Callback<Product>() {
+            @Override
+            public void success(Product product, Response response) {
+                productArray.add(product);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println(retrofitError.getMessage());
+            }
+        });
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                String upc = data.getStringExtra("upc");
+                Log.d(TAG, "UPC: " + upc);
+                addProduct(upc);
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+                Log.d(TAG, "NO RESULT RECEIVED");
+            }
+        }
+    }//onActivityResult
 
 }

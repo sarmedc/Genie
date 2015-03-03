@@ -10,12 +10,33 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.streetrats.genie.rest.GenieService;
+import com.example.streetrats.genie.rest.Product;
+import com.example.streetrats.genie.rest.RestClient;
+import com.example.streetrats.genie.rest.User;
+import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
+
+    RestClient restClient;
+    GenieService genieService;
+
+    ArrayList<Product> productArray = new ArrayList<Product>();
+    ProductsAdapter adapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +49,28 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_landing,
                 container, false);
 
-        //ListAdapter theAdapter = new MyAdapter(getActivity(), items);
+        restClient = new RestClient();
+        genieService = restClient.getGenieService();
 
-       //ListView theListView = (ListView) view.findViewById(R.id.listView);
+        getUserInfo(view);
 
-        //theListView.setAdapter(theAdapter);
+        adapter = new ProductsAdapter(getActivity(), productArray);
+        ListView theListView = (ListView) view.findViewById(R.id.friendsProductListView);
+        theListView.setAdapter(adapter);
+
+        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3) {
+                Product product = (Product) adapter.getItemAtPosition(position);
+
+                Intent intent = new Intent(getActivity(), ItemDetail.class);
+                intent.putExtra("PRODUCT", product);
+                intent.putExtra("PARENT_ACTIVITY", "HomeFragment");
+                startActivity(intent);
+            }
+        });
+
+        getFriendsProducts(view, adapter);
 
         return view;
     }
@@ -40,15 +78,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_home, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                break;
             case R.id.action_logout:
                 facebookLogout();
                 break;
@@ -75,6 +111,55 @@ public class HomeFragment extends Fragment {
         else {
             Log.d(TAG, "SESSION IS NULL");
         }
+    }
+
+    public void getUserInfo(final View view) {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+        genieService.getUser(new UserRequest(Session.getActiveSession().getAccessToken()), new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                System.out.println("User Name: " + user.first_name + " " + user.last_name);
+                System.out.println("User ID: " + user._id);
+                System.out.println("User FB ID: " + user.fb_id);
+                for(int i = 0; i < user.friends.size(); i++) {
+                    System.out.println("User Friend: " + user.friends.get(i));
+                }
+                TextView name = (TextView) view.findViewById(R.id.user_name);
+                name.setText(user.first_name + " " + user.last_name.charAt(0) + ".");
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println(retrofitError.getMessage());
+            }
+        });
+    }
+
+
+    public void getFriendsProducts(final View view, final ProductsAdapter adapter) {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+        genieService.getFriendsProducts(Session.getActiveSession().getAccessToken().toString(), new Callback<List<Product>>() {
+            @Override
+            public void success(List<Product> products, Response response) {
+                Log.d(TAG, "" + products.size());
+                if (products.size() != 0) {
+                    productArray.clear();
+                    for (int i = 0; i < products.size(); i++) {
+                        productArray.add(products.get(i));
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println(retrofitError.getMessage());
+            }
+        });
     }
 }
 

@@ -4,70 +4,95 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.streetrats.genie.ItemFragment"
+    tools:context="com.example.streetrats.genie.ItemDetail"
     android:background="@color/blue">
-
-    <ImageView
-        android:layout_width="500px"
-        android:layout_height="500px"
-        android:id="@+id/genie_lamp"
-        android:src="@drawable/genie_white_normal"
-        android:layout_below="@+id/itemName"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="ITEM"
-        android:textSize="64dp"
+        android:textSize="35dp"
         android:textColor="@color/white"
-        android:id="@+id/itemName"
+        android:id="@+id/item_name"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="325px"
+        android:layout_height="325px"
+        android:id="@+id/item_image"
+        android:src="@drawable/genie_white_normal"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/item_name"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Item Description. This is where the item is described with attributes like color, build material, etc."
-        android:textColor="#ffffff"
-        android:id="@+id/itemDescription"
-        android:layout_marginTop="48dp"
-        android:layout_below="@+id/genie_lamp"
+        android:id="@+id/item_feature"
+        android:layout_below="@+id/item_image"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Features: "
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        />
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/item_feature"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/item_scroll">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Item Description. This is where the item is described with attributes like color, build material, etc."
+            android:textColor="#ffffff"
+            android:id="@+id/item_description"
+            />
+
+    </ScrollView>
 
     <TextView
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="@drawable/rounded_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Price"
-        android:id="@+id/itemPrice"
-        android:layout_below="@+id/itemDescription"
-        android:layout_marginTop="47dp"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:id="@+id/item_price"
+        android:layout_marginTop="5dp"
         android:gravity="center"
-        android:layout_alignRight="@+id/Buybutton"
-        android:layout_alignEnd="@+id/Buybutton"
-        android:layout_alignLeft="@+id/Buybutton"
-        android:layout_alignStart="@+id/Buybutton" />
+        android:layout_below="@+id/item_scroll"
+        android:layout_centerHorizontal="true"/>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buy"
-        android:id="@+id/Buybutton"
-        android:background="@drawable/rounded_buttons"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/buy_button"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/item_price"
         android:layout_centerHorizontal="true" />
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
-        android:id="@+id/nextButton"
-        android:background="@drawable/rounded_buttons"
+        android:id="@+id/next_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -76,10 +101,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Previous"
-        android:id="@+id/previousButton"
-        android:background="@drawable/rounded_buttons"
+        android:id="@+id/previous_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" />-->
 
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@drawable/navbar_background"
+        android:id="@+id/radioGroup">
+        <RadioButton
+            android:id="@+id/btnHome"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/home"
+            android:layout_height="fill_parent"
+            />
+        <RadioButton
+            android:id="@+id/btnUser"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/profile_user"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnAdd"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/barcode"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnTrash"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/trash"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnLogout"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/logout"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+    </RadioGroup>
 </RelativeLayout>

@@ -23,7 +23,7 @@
         android:id="@+id/addItemFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <fragment android:name="com.example.streetrats.genie.ItemFragment"
+    <fragment android:name="com.example.streetrats.genie.ItemDetail"
         android:id="@+id/itemFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
