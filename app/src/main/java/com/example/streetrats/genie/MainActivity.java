@@ -8,6 +8,9 @@ import android.util.Log;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.LoginButton;
+
+import java.util.Arrays;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -36,6 +39,10 @@ public class MainActivity extends ActionBarActivity {
         checkLoggedIn();
 
         setContentView(R.layout.login);
+
+        LoginButton authButton = (LoginButton) findViewById(R.id.authButton);
+        authButton.setReadPermissions(Arrays.asList("user_friends"));
+
 
         /*FragmentManager fm = getSupportFragmentManager();
         fragments[LOGIN] = fm.findFragmentById(R.id.loginFragment);

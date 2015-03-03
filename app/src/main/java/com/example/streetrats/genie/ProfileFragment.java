@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.streetrats.genie.rest.AddProductRequest;
 import com.example.streetrats.genie.rest.GenieService;
@@ -93,7 +94,6 @@ public class ProfileFragment extends Fragment {
         radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
         radioButton = (RadioButton) view.findViewById(R.id.btnFile);
         radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-
 
         return view;
     }
@@ -208,11 +208,15 @@ public class ProfileFragment extends Fragment {
             public void success(Product product, Response response) {
                 productArray.add(product);
                 adapter.notifyDataSetChanged();
+                Toast toast = Toast.makeText(getActivity(), "Item was added!",  Toast.LENGTH_SHORT);
+                toast.show();
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
                 System.out.println(retrofitError.getMessage());
+                Toast toast = Toast.makeText(getActivity(), "This item is not available to add",  Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -224,11 +228,12 @@ public class ProfileFragment extends Fragment {
                 String upc = data.getStringExtra("upc");
                 Log.d(TAG, "UPC: " + upc);
                 addProduct(upc);
-
             }
             if (resultCode == RESULT_CANCELED) {
                 //Write your code if there's no result
                 Log.d(TAG, "NO RESULT RECEIVED");
+                Toast toast = Toast.makeText(getActivity(), "No Result Was Recieved",  Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
     }//onActivityResult

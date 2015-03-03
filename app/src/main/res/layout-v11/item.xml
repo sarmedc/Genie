@@ -105,5 +105,48 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />-->
 
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@drawable/navbar_background"
+        android:id="@+id/radioGroup">
+        <RadioButton
+            android:id="@+id/btnHome"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/home"
+            android:layout_height="fill_parent"
+            />
+        <RadioButton
+            android:id="@+id/btnUser"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/profile_user"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnAdd"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/barcode"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnTrash"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/trash"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnLogout"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/logout"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+    </RadioGroup>
+
 
 </RelativeLayout>
