@@ -3,6 +3,8 @@ package com.example.streetrats.genie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.RestClient;
@@ -43,6 +44,10 @@ public class FriendFragment extends Fragment {
     ArrayList<User> userArray = new ArrayList<User>();
     UsersAdapter adapter;
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -58,13 +63,29 @@ public class FriendFragment extends Fragment {
         genieService = restClient.getGenieService();
 
         /*ListAdapter theAdapter = new MyAdapter(getActivity(), items);*/
-        adapter = new UsersAdapter(getActivity(), userArray);
+        /*adapter = new UsersAdapter(getActivity(), userArray);
 
         ListView theListView = (ListView) view.findViewById(R.id.friendProductListView);
 
         theListView.setAdapter(adapter);
 
-        getFriends(view, adapter);
+        getFriends(view, adapter);*/
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new UsersAdapter(userArray);
+        mRecyclerView.setAdapter(mAdapter);
+
+        getFriends(view, mAdapter);
 
         return view;
     }
@@ -90,7 +111,7 @@ public class FriendFragment extends Fragment {
         return true;
     }
 
-    public void getFriends(final View view, final UsersAdapter adapter) {
+    public void getFriends(final View view, final RecyclerView.Adapter adapter) {
         if(restClient == null || genieService == null) {
             return;
         }

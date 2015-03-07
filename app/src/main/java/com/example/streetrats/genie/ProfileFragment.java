@@ -3,6 +3,8 @@ package com.example.streetrats.genie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,19 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.streetrats.genie.rest.AddProductRequest;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
-import com.example.streetrats.genie.rest.User;
-import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
 
 import java.util.ArrayList;
@@ -51,6 +47,10 @@ public class ProfileFragment extends Fragment {
     ArrayList<Product> productArray = new ArrayList<Product>();
     ProductsAdapter adapter;
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -65,9 +65,9 @@ public class ProfileFragment extends Fragment {
         restClient = new RestClient();
         genieService = restClient.getGenieService();
 
-        getUserInfo(view);
+        //getUserInfo(view);
 
-        adapter = new ProductsAdapter(getActivity(), productArray);
+        /*adapter = new ProductsAdapter(getActivity(), productArray);
         ListView theListView = (ListView) view.findViewById(R.id.userProductListView);
         theListView.setAdapter(adapter);
 
@@ -81,19 +81,23 @@ public class ProfileFragment extends Fragment {
                 intent.putExtra("PARENT_ACTIVITY", "ProfileFragment");
                startActivity(intent);
             }
-        });
+        });*/
 
-        getMyProducts(view, adapter);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
-        RadioButton radioButton;
-        radioButton = (RadioButton) view.findViewById(R.id.btnAll);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-        radioButton = (RadioButton) view.findViewById(R.id.btnPicture);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-        radioButton = (RadioButton)view.findViewById(R.id.btnVideo);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
-        radioButton = (RadioButton) view.findViewById(R.id.btnFile);
-        radioButton.setOnCheckedChangeListener(btnNavBarOnCheckedChangeListener);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new ProductsAdapter(getActivity(), productArray);
+        mRecyclerView.setAdapter(mAdapter);
+
+        getMyProducts(view, mAdapter);
 
         return view;
     }
@@ -148,7 +152,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    public void getUserInfo(final View view) {
+    /*public void getUserInfo(final View view) {
         if(restClient == null || genieService == null) {
             return;
         }
@@ -171,9 +175,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-    }
+    }*/
 
-    public void getMyProducts(final View view, final ProductsAdapter adapter) {
+    public void getMyProducts(final View view, final RecyclerView.Adapter adapter) {
         if(restClient == null || genieService == null) {
             return;
         }
@@ -207,7 +211,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void success(Product product, Response response) {
                 productArray.add(product);
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
                 Toast toast = Toast.makeText(getActivity(), "Item was added!",  Toast.LENGTH_SHORT);
                 toast.show();
             }

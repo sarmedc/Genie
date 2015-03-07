@@ -15,7 +15,7 @@
     android:background="@color/blue"
     >
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -61,12 +61,18 @@
             android:layout_alignLeft="@+id/intro_hello"
             android:layout_alignStart="@+id/intro_hello"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true" />-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 
     </RelativeLayout>
 
-    <RadioGroup
+    <!--<RadioGroup
     android:layout_width="fill_parent"
     android:layout_height="45dp"
     android:layout_alignParentBottom="true"
@@ -102,5 +108,47 @@
             android:drawableTop="@drawable/navbar_moreselector"
             android:layout_marginLeft="5dp"
             />
+    </RadioGroup>-->
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@drawable/navbar_background"
+        android:id="@+id/radioGroup">
+        <RadioButton
+            android:id="@+id/btnHome"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/home"
+            android:layout_height="fill_parent"
+            />
+        <RadioButton
+            android:id="@+id/btnUser"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/profile_user"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnAdd"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/barcode"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnTrash"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/trash"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/btnLogout"
+            style="@style/navbar_button"
+            android:drawableTop="@drawable/logout"
+            android:layout_marginLeft="5dp"
+            android:layout_height="fill_parent"
+            android:checked="false" />
     </RadioGroup>
 </RelativeLayout>
