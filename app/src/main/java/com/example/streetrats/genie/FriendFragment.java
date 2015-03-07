@@ -56,7 +56,7 @@ public class FriendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_browsefriends,
+        View view = inflater.inflate(R.layout.friends,
                 container, false);
 
         restClient = new RestClient();

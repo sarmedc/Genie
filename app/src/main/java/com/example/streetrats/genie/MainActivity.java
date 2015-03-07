@@ -4,13 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.View;
 
+import com.example.streetrats.genie.rest.GenieService;
+import com.example.streetrats.genie.rest.RestClient;
+import com.example.streetrats.genie.rest.User;
+import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 
 import java.util.Arrays;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -19,6 +28,9 @@ public class MainActivity extends ActionBarActivity {
     private UiLifecycleHelper uiHelper;
 
     private boolean isResumed = false;
+
+    RestClient restClient;
+    GenieService genieService;
 
     /*private static final int LOGIN = 0;
     private static final int PROFILE = 1;
@@ -36,13 +48,21 @@ public class MainActivity extends ActionBarActivity {
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
 
+        restClient = new RestClient();
+        genieService = restClient.getGenieService();
+
         checkLoggedIn();
 
         setContentView(R.layout.login);
 
         LoginButton authButton = (LoginButton) findViewById(R.id.authButton);
         authButton.setReadPermissions(Arrays.asList("user_friends"));
-
+        authButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logIn();
+            }
+        });
 
         /*FragmentManager fm = getSupportFragmentManager();
         fragments[LOGIN] = fm.findFragmentById(R.id.loginFragment);
@@ -84,6 +104,7 @@ public class MainActivity extends ActionBarActivity {
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 finish();
+                //logIn();
             } else if (state.isClosed()) {
                 // If the session state is closed:
                 // Show the login fragment
@@ -129,6 +150,27 @@ public class MainActivity extends ActionBarActivity {
         else {
             Log.d(TAG, "SESSION IS NULL OR CLOSED");
         }
+    }
+
+    public void logIn() {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+        genieService.getUser(new UserRequest(Session.getActiveSession().getAccessToken()), new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println(retrofitError.getMessage());
+            }
+        });
+
     }
 
     @Override
