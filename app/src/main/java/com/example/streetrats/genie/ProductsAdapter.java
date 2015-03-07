@@ -1,27 +1,45 @@
 package com.example.streetrats.genie;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
+import com.example.streetrats.genie.rest.RestClient;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
+
+import me.drakeet.materialdialog.MaterialDialog;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
 
         private Context context;
         private List<Product> productList;
 
+        private static final int RESULT_OK = 1;
+        private static final int RESULT_CANCELED = 0;
+
+        RestClient restClient;
+        GenieService genieService;
+
         public ProductsAdapter(Context context, List<Product> productList) {
             this.productList = productList;
             this.context = context;
+            restClient = new RestClient();
+            genieService = restClient.getGenieService();
         }
 
         @Override
@@ -32,19 +50,91 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         @Override
         public void onBindViewHolder(ProductViewHolder productViewHolder, int i) {
             final int position = i;
-            Product p = productList.get(i);
+            final Product p = productList.get(i);
+
             productViewHolder.vName.setText(p.name);
             Picasso.with(productViewHolder.context)
                     .load(p.image)
                     .placeholder(R.drawable.product)
                     .error(R.drawable.product)
                     .into(productViewHolder.vImage);
-            productViewHolder.vView.setOnClickListener(new View.OnClickListener() {
+
+            productViewHolder.vDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ItemDetail.class);
+                    removeProduct(p._id, position);
+                }
+            });
+            productViewHolder.vImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*Intent intent = new Intent(context, ItemDetail.class);
                     intent.putExtra("PRODUCT", productList.get(position)).putExtra("PARENT_ACTIVITY", "HomeFragment");
-                    context.startActivity(intent);
+                    context.startActivity(intent);*/
+                    /*new MaterialDialog.Builder(context)
+                            .title("Title")
+                            .content("Content")
+                            .positiveText("Agree")
+                            .negativeText("Disagree")
+                            .show();*/
+
+                    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View view = inflater.inflate(R.layout.item_image, null);
+                    ImageView itemImage = (ImageView) view.findViewById(R.id.item_image);
+                    Picasso.with(view.getContext())
+                            .load(p.image)
+                            .placeholder(R.drawable.product)
+                            .error(R.drawable.product)
+                            .into(itemImage);
+
+                    final MaterialDialog dialog = new MaterialDialog(context);
+                    dialog.setView(view);
+                    dialog.setNegativeButton("Close", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.show();
+
+                }
+            });
+            productViewHolder.vName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*Intent intent = new Intent(context, ItemDetail.class);
+                    intent.putExtra("PRODUCT", productList.get(position)).putExtra("PARENT_ACTIVITY", "HomeFragment");
+                    context.startActivity(intent);*/
+                    JSONObject features = null;
+                    StringBuilder result = new StringBuilder("Features:" + '\n');
+                    try {
+                        features = new JSONObject(p.features);
+                        for(int i = 0; i < features.names().length(); i++) {
+                            result.append(features.names().getString(i) + " : " + features.get(features.names().getString(i)) + '\n');
+                        }
+                    } catch (JSONException e) {
+                    }
+
+                    final MaterialDialog dialog = new MaterialDialog(context);
+                    dialog.setTitle(p.name);
+                    dialog.setMessage(result);
+                    dialog.setPositiveButton("Buy", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast toast = Toast.makeText(context, "Bought", Toast.LENGTH_SHORT);
+                            toast.show();
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.setNegativeButton("Close", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.show();
                 }
             });
         }
@@ -55,18 +145,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                     from(viewGroup.getContext()).
                     inflate(R.layout.list_products, viewGroup, false);
 
-
             ProductViewHolder vh = new ProductViewHolder(productView);
 
             return vh;
         }
 
-
-
         public static class ProductViewHolder extends RecyclerView.ViewHolder {
             protected View vView;
             protected TextView vName;
             protected ImageView vImage;
+            protected ImageView vDelete;
             protected Context context;
 
             public ProductViewHolder(View v) {
@@ -74,7 +162,29 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 vView = v;
                 vName =  (TextView) v.findViewById(R.id.list_product_name);
                 vImage = (ImageView)  v.findViewById(R.id.list_product_image);
+                vDelete = (ImageView) v.findViewById(R.id.product_delete_btn);
                 context = v.getContext();
             }
+        }
+
+        public void removeProduct(String _id, int _position) {
+            final String id = _id;
+            final int position = _position;
+
+            if(restClient == null || genieService == null) {
+                return;
+            }
+            genieService.removeProduct(id, new Callback<Product>() {
+                @Override
+                public void success(Product product, Response response) {
+                    productList.remove(position);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+                    System.out.println(retrofitError.getMessage());
+                }
+            });
         }
     }

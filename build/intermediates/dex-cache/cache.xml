@@ -8,5 +8,26 @@
         sha1="0a4207597233f779fc933633711517b53ae84d29">
         <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/classes-b9dcddae95d7ab6c2174944a9df8841a5480579d.jar" />
     </item>
+    <item
+        jar="/Users/saif/AndroidProjects/Genie/app/build/intermediates/exploded-aar/com.afollestad/material-dialogs/0.6.3.5/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="579e006fea216b5fe5ee05b2cf1ad7404427d215">
+        <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/classes-a34e937a15107dc591fee640314644728111b983.jar" />
+    </item>
+    <item
+        jar="/Users/saif/AndroidProjects/Genie/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.4/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="87405405e403de68f4057757b8a2e8de02bd65d0">
+        <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/classes-8cae3948fb46a32b496ace07601b4e1a6b2d6f88.jar" />
+    </item>
+    <item
+        jar="/Users/saif/AndroidProjects/Genie/app/build/intermediates/exploded-aar/me.drakeet.materialdialog/library/1.2.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8646b1e69dd5d923d8866dc4311859f0fbca456c">
+        <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/classes-31b17078c264f16083471f3861eb0ca074bf8397.jar" />
+    </item>
 
 </items>

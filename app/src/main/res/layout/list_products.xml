@@ -1,6 +1,5 @@
 <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ripple="http://schemas.android.com/tools"
     android:id="@+id/list_product"
     android:layout_width="match_parent"
     android:layout_height="100dp"
@@ -16,6 +15,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/list_product_image"
+            android:src="@drawable/genie_black"
             android:layout_alignParentLeft="true"/>
 
         <TextView
@@ -27,6 +27,14 @@
             android:textSize="15dp"
             android:layout_toRightOf="@id/list_product_image"
             />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/product_delete_btn"
+            android:src="@drawable/ic_close"
+            android:layout_alignParentRight="true"/>
+
 
     </RelativeLayout>
 

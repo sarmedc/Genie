@@ -191,9 +191,9 @@ public class MainActivity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
             Intent i = new Intent(MainActivity.this, HomeActivity.class);
-            //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
-            //finish();
+            finish();
         }
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);

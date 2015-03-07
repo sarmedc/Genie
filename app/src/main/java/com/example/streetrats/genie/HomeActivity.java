@@ -17,9 +17,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.streetrats.genie.rest.GenieService;
+import com.example.streetrats.genie.rest.RestClient;
+import com.example.streetrats.genie.rest.User;
+import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener, android.support.v7.app.ActionBar.TabListener {
@@ -34,8 +42,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
     ViewPager mViewPager;
 
-    /*RestClient restClient;
-    GenieService genieService;*/
+    RestClient restClient;
+    GenieService genieService;
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void onCreate(Bundle savedInstanceState) {
@@ -61,9 +69,12 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             Log.d(TAG, "SESSION IS NULL");
         }
 
-        /*restClient = new RestClient();
+        restClient = new RestClient();
         genieService = restClient.getGenieService();
-        getUserInfo();*/
+
+        View view = this.findViewById(android.R.id.content);
+
+        getUserInfo(view);
 
         setContentView(R.layout.home_activity);
 
@@ -104,7 +115,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
-    /*public void getUserInfo() {
+    public void getUserInfo(final View view) {
         if(restClient == null || genieService == null) {
             return;
         }
@@ -125,7 +136,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             }
         });
 
-    }*/
+    }
 
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         // Only make changes if the activity is visible

@@ -5,6 +5,7 @@ import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.POST;
@@ -31,5 +32,9 @@ public interface GenieService {
     @Headers("Content-Type: application/json")
     @POST("/api/user/products")
     void addProduct(@Body AddProductRequest body, Callback<Product> callback);
+
+    @Headers("Content-Type: application/json")
+    @DELETE("/api/user/products/{id}")
+    void removeProduct(@Path("id") String id, Callback<Product> callback);
 
 }

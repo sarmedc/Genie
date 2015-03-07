@@ -79,14 +79,14 @@
         android:layout_centerHorizontal="true"/>
 
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buy"
         android:id="@+id/buy_button"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/item_price"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
 
     <!--<Button
         android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />-->
 
-    <RadioGroup
+    <!--<RadioGroup
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
@@ -147,5 +147,5 @@
             android:layout_marginLeft="5dp"
             android:layout_height="fill_parent"
             android:checked="false" />
-    </RadioGroup>
+    </RadioGroup>-->
 </RelativeLayout>
