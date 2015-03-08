@@ -21,19 +21,23 @@
         <TextView
             android:id="@+id/list_product_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:text="Name"
             android:gravity="center_vertical"
             android:textSize="15dp"
+            android:maxLines="3"
             android:layout_toRightOf="@id/list_product_image"
+            android:layout_toLeftOf="@+id/product_delete_btn"
             />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/product_delete_btn"
             android:src="@drawable/ic_close"
             android:layout_alignParentRight="true"/>
+
+
 
 
     </RelativeLayout>

@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.enums.SnackbarType;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -115,6 +117,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                         }
                     } catch (JSONException e) {
                     }
+                    result.append('\n' + "Price: $" + p.price);
+
 
                     final MaterialDialog dialog = new MaterialDialog(context);
                     dialog.setTitle(p.name);
@@ -122,8 +126,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                     dialog.setPositiveButton("Buy", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast toast = Toast.makeText(context, "Bought", Toast.LENGTH_SHORT);
-                            toast.show();
+                            SnackbarManager.show(
+                                    Snackbar.with(context) // context
+                                            .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
+                                            .text("You Bought This Item") // text to be displayed
+                                            .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
+                                            .animation(false) // don't animate it
+                                    , (HomeActivity)context); // where it is displayed
                             dialog.dismiss();
                         }
                     });
@@ -177,12 +186,26 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             genieService.removeProduct(id, new Callback<Product>() {
                 @Override
                 public void success(Product product, Response response) {
+                    SnackbarManager.show(
+                            Snackbar.with(context) // context
+                                    .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
+                                    .text("You Removed An Item") // text to be displayed
+                                    .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
+                                    .animation(false) // don't animate it
+                            , (HomeActivity)context); // where it is displayed
                     productList.remove(position);
                     notifyDataSetChanged();
                 }
 
                 @Override
                 public void failure(RetrofitError retrofitError) {
+                    SnackbarManager.show(
+                            Snackbar.with(context) // context
+                                    .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
+                                    .text("Could Not Remove Item. Something Went Wrong.") // text to be displayed
+                                    .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
+                                    .animation(false) // don't animate it
+                            , (HomeActivity)context); // where it is displayed
                     System.out.println(retrofitError.getMessage());
                 }
             });

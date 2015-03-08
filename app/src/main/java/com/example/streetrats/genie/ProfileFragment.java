@@ -7,19 +7,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.streetrats.genie.rest.AddProductRequest;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
 import com.facebook.Session;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.enums.SnackbarType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,20 +33,14 @@ import retrofit.client.Response;
 public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragment";
+
     private static final int RESULT_OK = 1;
     private static final int RESULT_CANCELED = 0;
 
     RestClient restClient;
     GenieService genieService;
 
-    /*private final String[] items = { "Android", "iPhone", "WindowsMobile",
-            "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-            "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-            "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-            "Android", "iPhone", "WindowsMobile" };*/
-
     ArrayList<Product> productArray = new ArrayList<Product>();
-    ProductsAdapter adapter;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -53,7 +48,6 @@ public class ProfileFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -65,70 +59,31 @@ public class ProfileFragment extends Fragment {
         restClient = new RestClient();
         genieService = restClient.getGenieService();
 
-        //getUserInfo(view);
-
-        /*adapter = new ProductsAdapter(getActivity(), productArray);
-        ListView theListView = (ListView) view.findViewById(R.id.userProductListView);
-        theListView.setAdapter(adapter);
-
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3) {
-               Product product = (Product) adapter.getItemAtPosition(position);
-
-               Intent intent = new Intent(getActivity(), ItemDetail.class);
-               intent.putExtra("PRODUCT", product);
-                intent.putExtra("PARENT_ACTIVITY", "ProfileFragment");
-               startActivity(intent);
+        Button scanButton = (Button) view.findViewById(R.id.btnScan);
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SimpleScannerActivity.class);
+                startActivityForResult(intent, 1);
             }
-        });*/
+        });
+
+        Button logoutButton = (Button) view.findViewById(R.id.btnLogout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                facebookLogout();
+            }
+        });
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
         mAdapter = new ProductsAdapter(getActivity(), productArray);
         mRecyclerView.setAdapter(mAdapter);
 
         getMyProducts(view, mAdapter);
 
         return view;
-    }
-
-    private CompoundButton.OnCheckedChangeListener btnNavBarOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            /*if (isChecked) {
-                Toast.makeText(getActivity(), buttonView.getText(), Toast.LENGTH_SHORT).show();
-            }*/
-        }
-    };
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
-        inflater.inflate(R.menu.menu_profile, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_barcode:
-                Intent intent = new Intent(getActivity(), SimpleScannerActivity.class);
-                startActivityForResult(intent, 1);
-                break;
-            case R.id.action_logout:
-                facebookLogout();
-                break;
-        }
-        return true;
     }
 
     public void facebookLogout() {
@@ -152,38 +107,21 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    /*public void getUserInfo(final View view) {
-        if(restClient == null || genieService == null) {
-            return;
-        }
-        genieService.getUser(new UserRequest(Session.getActiveSession().getAccessToken()), new Callback<User>() {
-            @Override
-            public void success(User user, Response response) {
-                System.out.println("User Name: " + user.first_name + " " + user.last_name);
-                System.out.println("User ID: " + user._id);
-                System.out.println("User FB ID: " + user.fb_id);
-                for(int i = 0; i < user.friends.size(); i++) {
-                    System.out.println("User Friend: " + user.friends.get(i));
-                }
-                TextView name = (TextView) view.findViewById(R.id.user_name);
-                name.setText(user.first_name + " " + user.last_name.charAt(0) + ".");
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {
-                System.out.println(retrofitError.getMessage());
-            }
-        });
-
-    }*/
-
     public void getMyProducts(final View view, final RecyclerView.Adapter adapter) {
         if(restClient == null || genieService == null) {
             return;
         }
+
+        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title("Fetching Your Products")
+                .content("Please Wait..")
+                .progress(true, 0)
+                .show();
+
         genieService.getMyProducts(Session.getActiveSession().getAccessToken().toString(), new Callback<List<Product>>() {
             @Override
             public void success(List<Product> products, Response response) {
+                dialog.cancel();
                 Log.d(TAG, "" + products.size());
                 if (products.size() != 0) {
                     productArray.clear();
@@ -197,6 +135,7 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError retrofitError) {
+                dialog.cancel();
                 System.out.println(retrofitError.getMessage());
             }
         });
@@ -207,17 +146,31 @@ public class ProfileFragment extends Fragment {
         if(restClient == null || genieService == null) {
             return;
         }
+
+        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title("Adding Your Item")
+                .content("Please Wait..")
+                .progress(true, 0)
+                .show();
+
         genieService.addProduct(new AddProductRequest(upc, Session.getActiveSession().getAccessToken()), new Callback<Product>() {
             @Override
             public void success(Product product, Response response) {
+                dialog.cancel();
                 productArray.add(product);
                 mAdapter.notifyDataSetChanged();
-                Toast toast = Toast.makeText(getActivity(), "Item was added!",  Toast.LENGTH_SHORT);
-                toast.show();
+                SnackbarManager.show(
+                        Snackbar.with(getActivity()) // context
+                                .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
+                                .text("Your Item Was Added") // text to be displayed
+                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
+                                .animation(false) // don't animate it
+                        , getActivity()); // where it is displayed
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
+                dialog.cancel();
                 System.out.println(retrofitError.getMessage());
                 Toast toast = Toast.makeText(getActivity(), "This item is not available to add",  Toast.LENGTH_SHORT);
                 toast.show();

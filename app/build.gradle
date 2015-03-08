@@ -30,6 +30,7 @@ dependencies {
     compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
     compile 'com.afollestad:material-dialogs:0.6.3.5'
     compile 'me.drakeet.materialdialog:library:1.2.2'
+    compile 'com.nispok:snackbar:2.10.2'
 
     //facebook sdk
     compile 'com.facebook.android:facebook-android-sdk:+'

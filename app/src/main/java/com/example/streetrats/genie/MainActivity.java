@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.View;
 
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.RestClient;
@@ -32,15 +31,6 @@ public class MainActivity extends ActionBarActivity {
     RestClient restClient;
     GenieService genieService;
 
-    /*private static final int LOGIN = 0;
-    private static final int PROFILE = 1;
-    private static final int ITEM = 2;
-    private static final int ADD_ITEM = 3;
-    private static final int ADD_METHOD = 4;
-    private static final int FRAGMENT_COUNT = ADD_METHOD + 1;
-
-    private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];*/
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,76 +47,27 @@ public class MainActivity extends ActionBarActivity {
 
         LoginButton authButton = (LoginButton) findViewById(R.id.authButton);
         authButton.setReadPermissions(Arrays.asList("user_friends"));
-        authButton.setOnClickListener(new View.OnClickListener() {
+        authButton.setBackgroundColor(getResources().getColor(R.color.blue_darker));
+        /*authButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logIn();
             }
-        });
-
-        /*FragmentManager fm = getSupportFragmentManager();
-        fragments[LOGIN] = fm.findFragmentById(R.id.loginFragment);
-        fragments[PROFILE] = fm.findFragmentById(R.id.profileFragment);
-        fragments[ITEM] = fm.findFragmentById(R.id.itemFragment);
-        fragments[ADD_ITEM] = fm.findFragmentById(R.id.addItemFragment);
-        fragments[ADD_METHOD] = fm.findFragmentById(R.id.addMethodFragment);
-
-        FragmentTransaction transaction = fm.beginTransaction();
-        for(int i = 0; i < fragments.length; i++) {
-            transaction.hide(fragments[i]);
-        }
-        transaction.commit();*/
+        });*/
     }
-
-    /*private void showFragment(int fragmentIndex, boolean addToBackStack) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        for (int i = 0; i < fragments.length; i++) {
-            if (i == fragmentIndex) {
-                transaction.show(fragments[i]);
-            } else {
-                transaction.hide(fragments[i]);
-            }
-        }
-        if (addToBackStack) {
-            transaction.addToBackStack(null);
-        }
-        transaction.commit();
-    }*/
 
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         // Only make changes if the activity is visible
         if (isResumed) {
             if (state.isOpened()) {
-                // If the session state is open:
-                // Show the authenticated fragment
                 Intent i = new Intent(MainActivity.this, HomeActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 finish();
-                //logIn();
             } else if (state.isClosed()) {
-                // If the session state is closed:
-                // Show the login fragment
             }
         }
     }
-
-    /*@Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        Session session = Session.getActiveSession();
-
-        if (session != null && session.isOpened()) {
-            // if the session is already open,
-            // try to show the selection fragment
-            showFragment(PROFILE, false);
-        } else {
-            // otherwise present the splash screen
-            // and ask the person to login.
-            showFragment(LOGIN, false);
-        }
-    }*/
 
     private Session.StatusCallback callback =
             new Session.StatusCallback() {
@@ -134,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
                 public void call(Session session,
                                  SessionState state, Exception exception) {
                     onSessionStateChange(session, state, exception);
-                    // checkLoggedIn();
+                    checkLoggedIn();
                 }
             };
 
