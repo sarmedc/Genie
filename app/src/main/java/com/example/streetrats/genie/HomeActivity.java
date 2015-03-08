@@ -25,6 +25,8 @@ import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.parse.Parse;
+import com.parse.PushService;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -52,6 +54,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
+
+        Parse.initialize(this, "XU6bUmIRtiSFHlVjnaSjQODfXAb7t1Ruo9RGXzVc", "01AVOUJrn8uTH9AZ1j1U8KD3R6kIRWkGJbYrFvXv");
+        PushService.setDefaultPushCallback(this, HomeActivity.class);
 
         Session session = Session.getActiveSession();
 

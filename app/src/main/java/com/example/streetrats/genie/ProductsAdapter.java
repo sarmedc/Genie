@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
@@ -21,10 +22,11 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import me.drakeet.materialdialog.MaterialDialog;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+//import me.drakeet.materialdialog.MaterialDialog;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
 
@@ -89,7 +91,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                             .error(R.drawable.product)
                             .into(itemImage);
 
-                    final MaterialDialog dialog = new MaterialDialog(context);
+                    final me.drakeet.materialdialog.MaterialDialog dialog = new me.drakeet.materialdialog.MaterialDialog(context);
                     dialog.setView(view);
                     dialog.setNegativeButton("Close", new View.OnClickListener() {
                         @Override
@@ -120,7 +122,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                     result.append('\n' + "Price: $" + p.price);
 
 
-                    final MaterialDialog dialog = new MaterialDialog(context);
+                    /*final MaterialDialog dialog = new MaterialDialog(context);
                     dialog.setTitle(p.name);
                     dialog.setMessage(result);
                     dialog.setPositiveButton("Buy", new View.OnClickListener() {
@@ -143,6 +145,25 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                         }
                     });
                     dialog.setCanceledOnTouchOutside(true);
+                    dialog.show();*/
+                    final MaterialDialog.Builder dialog = new MaterialDialog.Builder(context)
+                            .title(p.name)
+                            .content(result)
+                            .positiveText("Buy")
+                            .negativeText("Close")
+                            .callback(new MaterialDialog.ButtonCallback() {
+                                @Override
+                                public void onPositive(MaterialDialog dialog) {
+                                    SnackbarManager.show(
+                                            Snackbar.with(context) // context
+                                                    .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
+                                                    .text("You Bought This Item") // text to be displayed
+                                                    .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
+                                                    .animation(false) // don't animate it
+                                            , (HomeActivity)context); // where it is displayed
+                                }
+                            });
+                    dialog.build();
                     dialog.show();
                 }
             });
