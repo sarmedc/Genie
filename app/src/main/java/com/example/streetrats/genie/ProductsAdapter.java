@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.text.DecimalFormat;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -111,7 +112,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                     intent.putExtra("PRODUCT", productList.get(position)).putExtra("PARENT_ACTIVITY", "HomeFragment");
                     context.startActivity(intent);*/
                     JSONObject features = null;
-                    StringBuilder result = new StringBuilder("Features:" + '\n');
+                    StringBuilder result = new StringBuilder("Item Information:" + '\n');
                     try {
                         features = new JSONObject(p.features);
                         for(int i = 0; i < features.names().length(); i++) {
@@ -119,7 +120,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                         }
                     } catch (JSONException e) {
                     }
-                    result.append('\n' + "Price: $" + p.price);
+
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String prodprice = df.format(p.price);
+                    result.append('\n' + "Price: $" + prodprice);
 
 
                     /*final MaterialDialog dialog = new MaterialDialog(context);

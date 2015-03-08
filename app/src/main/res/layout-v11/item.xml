@@ -12,21 +12,21 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="ITEM"
-        android:textSize="20dp"
+        android:textSize="28dp"
         android:textColor="@color/white"
         android:id="@+id/item_name"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="300px"
-        android:layout_height="300px"
+        android:layout_width="400px"
+        android:layout_height="400px"
         android:id="@+id/item_image"
         android:src="@drawable/genie_white_normal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/item_name"
         android:layout_centerHorizontal="true" />
 
@@ -35,10 +35,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/item_feature"
         android:layout_below="@+id/item_image"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:text="Features: "
+        android:text="Item Information: "
         android:textSize="20dp"
         android:textColor="@color/white"
         />
@@ -46,8 +46,8 @@
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_below="@+id/item_feature"
@@ -71,9 +71,9 @@
         android:layout_height="wrap_content"
         android:text="Price"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="23dp"
         android:id="@+id/item_price"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="1dp"
         android:gravity="center"
         android:layout_below="@+id/item_scroll"
         android:layout_centerHorizontal="true"/>
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:text="Buy"
         android:id="@+id/buy_button"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/item_price"
         android:layout_centerHorizontal="true" />
 
@@ -107,7 +107,7 @@
 
     <RadioGroup
         android:layout_width="fill_parent"
-        android:layout_height="45dp"
+        android:layout_height="43dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@drawable/navbar_background"

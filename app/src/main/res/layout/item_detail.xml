@@ -38,7 +38,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:text="Features: "
+        android:text="Item Information: "
         android:textSize="20dp"
         android:textColor="@color/white"
         />
@@ -53,7 +53,7 @@
         android:layout_below="@+id/item_feature"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/item_scroll">
+        android:id="@+id/item_scroll" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:text="Price"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:id="@+id/item_price"
         android:layout_marginTop="5dp"
         android:gravity="center"
