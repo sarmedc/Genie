@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.RestClient;
 import com.example.streetrats.genie.rest.User;
@@ -66,9 +67,17 @@ public class FriendFragment extends Fragment {
         if(restClient == null || genieService == null) {
             return;
         }
+
+        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title("Fetching Your Friends")
+                .content("Please Wait..")
+                .progress(true, 0)
+                .show();
+
         genieService.getFriends(Session.getActiveSession().getAccessToken().toString(), new Callback<List<User>>() {
             @Override
             public void success(List<User> friends, Response response) {
+                dialog.cancel();
                 if(friends.size() != 0) {
                     userArray.clear();
                     for (int i = 0; i < friends.size(); i++) {
@@ -80,6 +89,7 @@ public class FriendFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError retrofitError) {
+                dialog.cancel();
                 System.out.println(retrofitError.getMessage());
             }
         });
