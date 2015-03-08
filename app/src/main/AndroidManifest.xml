@@ -60,10 +60,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.streetrats.genie.MainActivity" />
         </activity>-->
+        <!--where actionbar title gets set-->
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait"
-            android:label="HomeActivity"
+            android:label="Genie"
             android:theme="@style/AppTheme"/>
         <activity
             android:name="com.example.streetrats.genie.ItemDetail"

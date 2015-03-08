@@ -118,8 +118,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
-
-        getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.blue)));
+        /*set tab colors here*/
+        getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.light_blue)));
 
     }
 
