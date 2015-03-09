@@ -34,7 +34,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/product_delete_btn"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/delete"
             android:layout_alignParentRight="true"/>
 
 

@@ -16,6 +16,8 @@ public class Product implements Parcelable{
     public String features;
     public String image;
     public String owner;
+    public String owner_first_name;
+    public String owner_last_name;
 
     public int describeContents() {
         return 0;
@@ -30,6 +32,8 @@ public class Product implements Parcelable{
         out.writeString(features);
         out.writeString(image);
         out.writeString(owner);
+        out.writeString(owner_first_name);
+        out.writeString(owner_last_name);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -57,6 +61,8 @@ public class Product implements Parcelable{
         features = in.readString();
         image = in.readString();
         owner = in.readString();
+        owner_first_name = in.readString();
+        owner_last_name = in.readString();
     }
 
     public void printInfo() {
@@ -67,5 +73,7 @@ public class Product implements Parcelable{
         System.out.println("Features: " + features);
         System.out.println("Image: " + image);
         System.out.println("Owner " + owner);
+        System.out.println("Owner First Name" + owner_first_name);
+        System.out.println("Owner Last Name" + owner_last_name);
     }
 }

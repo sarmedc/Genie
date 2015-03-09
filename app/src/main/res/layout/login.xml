@@ -24,10 +24,10 @@
         />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:id="@+id/item_image"
-        android:src="@drawable/genie_white_normal"
+        android:src="@drawable/genie_icon"
         android:layout_centerInParent="true"
         />
 

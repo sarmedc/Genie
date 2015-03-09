@@ -78,7 +78,7 @@ public class ProfileFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ProductsAdapter(getActivity(), productArray);
+        mAdapter = new ProductsUserAdapter(getActivity(), productArray);
         mRecyclerView.setAdapter(mAdapter);
 
         getMyProducts(view, mAdapter);

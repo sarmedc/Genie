@@ -20,5 +20,6 @@
     <string name="demo_collection">Demo Collection</string>
     <string name="logoutBtn">Logout</string>
     <string name="action_barcode">Barcode</string>
+    <string name="filter">Filter</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.example.streetrats.genie.rest;
 
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -10,6 +11,7 @@ import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.QueryMap;
 
 public interface GenieService {
 
@@ -27,7 +29,7 @@ public interface GenieService {
 
     @Headers("Content-Type: application/json")
     @GET("/api/user/{access_token}/friends/products")
-    void getFriendsProducts(@Path("access_token") String access_token, Callback<List<Product>> callback);
+    void getFriendsProducts(@Path("access_token") String access_token, @QueryMap(encodeNames=true) Map<String, String> filters, Callback<List<Product>> callback);
 
     @Headers("Content-Type: application/json")
     @POST("/api/user/products")
