@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import retrofit.Callback;
@@ -28,7 +29,7 @@ import retrofit.client.Response;
 
 //import me.drakeet.materialdialog.MaterialDialog;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
+public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAdapter.ProductFriendViewHolder> {
 
         private Context context;
         private List<Product> productList;
@@ -39,7 +40,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         RestClient restClient;
         GenieService genieService;
 
-        public ProductsAdapter(Context context, List<Product> productList) {
+        public ProductsFriendAdapter(Context context, List<Product> productList) {
             this.productList = productList;
             this.context = context;
             restClient = new RestClient();
@@ -52,7 +53,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         }
 
         @Override
-        public void onBindViewHolder(ProductViewHolder productViewHolder, int i) {
+        public void onBindViewHolder(ProductFriendViewHolder productViewHolder, int i) {
             final int position = i;
             final Product p = productList.get(i);
 
@@ -63,12 +64,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                     .error(R.drawable.product)
                     .into(productViewHolder.vImage);
 
-            productViewHolder.vDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    removeProduct(p._id, position);
-                }
-            });
+            productViewHolder.vDelete.setVisibility(View.GONE);
+
             productViewHolder.vImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -119,33 +116,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                         }
                     } catch (JSONException e) {
                     }
-                    result.append('\n' + "Price: $" + p.price);
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String price = df.format(p.price);
+                    result.append('\n' + "Price: $" + price);
 
-
-                    /*final MaterialDialog dialog = new MaterialDialog(context);
-                    dialog.setTitle(p.name);
-                    dialog.setMessage(result);
-                    dialog.setPositiveButton("Buy", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SnackbarManager.show(
-                                    Snackbar.with(context) // context
-                                            .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
-                                            .text("You Bought This Item") // text to be displayed
-                                            .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
-                                            .animation(false) // don't animate it
-                                    , (HomeActivity)context); // where it is displayed
-                            dialog.dismiss();
-                        }
-                    });
-                    dialog.setNegativeButton("Close", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                    dialog.setCanceledOnTouchOutside(true);
-                    dialog.show();*/
                     final MaterialDialog.Builder dialog = new MaterialDialog.Builder(context)
                             .title(p.name)
                             .content(result)
@@ -170,24 +144,24 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         }
 
         @Override
-        public ProductViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public ProductFriendViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View productView = LayoutInflater.
                     from(viewGroup.getContext()).
                     inflate(R.layout.list_products, viewGroup, false);
 
-            ProductViewHolder vh = new ProductViewHolder(productView);
+            ProductFriendViewHolder vh = new ProductFriendViewHolder(productView);
 
             return vh;
         }
 
-        public static class ProductViewHolder extends RecyclerView.ViewHolder {
+        public static class ProductFriendViewHolder extends RecyclerView.ViewHolder {
             protected View vView;
             protected TextView vName;
             protected ImageView vImage;
             protected ImageView vDelete;
             protected Context context;
 
-            public ProductViewHolder(View v) {
+            public ProductFriendViewHolder(View v) {
                 super(v);
                 vView = v;
                 vName =  (TextView) v.findViewById(R.id.list_product_name);
