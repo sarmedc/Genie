@@ -39,4 +39,8 @@ public interface GenieService {
     @DELETE("/api/user/products/{id}")
     void removeProduct(@Path("id") String id, Callback<Product> callback);
 
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/friends/products")
+    void buyProduct(@Body BuyProductRequest body, Callback<Product> callback);
+
 }

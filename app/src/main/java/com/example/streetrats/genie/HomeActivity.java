@@ -25,6 +25,7 @@ import com.example.streetrats.genie.rest.UserRequest;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.google.analytics.tracking.android.EasyTracker;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -168,6 +169,18 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     // checkLoggedIn();
                 }
             };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+    }
 
     @Override
     public void onResume() {

@@ -13,6 +13,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
+import com.google.analytics.tracking.android.EasyTracker;
 
 import java.util.Arrays;
 
@@ -111,7 +112,18 @@ public class MainActivity extends ActionBarActivity {
                 System.out.println(retrofitError.getMessage());
             }
         });
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
     }
 
     @Override

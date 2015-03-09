@@ -3,6 +3,7 @@ package com.example.streetrats.genie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,9 +31,11 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "ProfileFragment";
+
+    private View view;
 
     private static final int RESULT_OK = 1;
     private static final int RESULT_CANCELED = 0;
@@ -41,6 +44,8 @@ public class ProfileFragment extends Fragment {
     GenieService genieService;
 
     ArrayList<Product> productArray = new ArrayList<Product>();
+
+    private SwipeRefreshLayout mSwipeLayout;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -53,7 +58,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.profile,
+        view = inflater.inflate(R.layout.profile,
                 container, false);
 
         restClient = new RestClient();
@@ -81,7 +86,13 @@ public class ProfileFragment extends Fragment {
         mAdapter = new ProductsUserAdapter(getActivity(), productArray);
         mRecyclerView.setAdapter(mAdapter);
 
-        getMyProducts(view, mAdapter);
+        getMyProducts(view);
+
+        mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         return view;
     }
@@ -107,10 +118,12 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    public void getMyProducts(final View view, final RecyclerView.Adapter adapter) {
+    public void getMyProducts(final View view) {
         if(restClient == null || genieService == null) {
             return;
         }
+
+        final RecyclerView.Adapter adapter = mAdapter;
 
         final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
                 .title("Fetching Your Products")
@@ -130,6 +143,7 @@ public class ProfileFragment extends Fragment {
                         productArray.add(products.get(i));
                     }
                     adapter.notifyDataSetChanged();
+                    mSwipeLayout.setRefreshing(false);
                 }
             }
 
@@ -195,4 +209,8 @@ public class ProfileFragment extends Fragment {
         }
     }//onActivityResult
 
+    @Override
+    public void onRefresh() {
+        getMyProducts(view);
+    }
 }

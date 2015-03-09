@@ -37,6 +37,14 @@
             android:src="@drawable/delete"
             android:layout_alignParentRight="true"/>
 
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/product_bought"
+            android:src="@drawable/check"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+
 
     </RelativeLayout>
 

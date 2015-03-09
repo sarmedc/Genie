@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.streetrats.genie.rest.BuyProductRequest;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -64,20 +67,31 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                     .error(R.drawable.product)
                     .into(productViewHolder.vImage);
 
+            if(p.bought == true)  {
+                productViewHolder.vBought.setVisibility(View.VISIBLE);
+            } else {
+                productViewHolder.vBought.setVisibility(View.GONE);
+            }
+
             productViewHolder.vDelete.setVisibility(View.GONE);
 
             productViewHolder.vImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*Intent intent = new Intent(context, ItemDetail.class);
-                    intent.putExtra("PRODUCT", productList.get(position)).putExtra("PARENT_ACTIVITY", "HomeFragment");
-                    context.startActivity(intent);*/
-                    /*new MaterialDialog.Builder(context)
-                            .title("Title")
-                            .content("Content")
-                            .positiveText("Agree")
-                            .negativeText("Disagree")
-                            .show();*/
+
+                    // May return null if a EasyTracker has not yet been initialized with a
+                    // property ID.
+                    EasyTracker easyTracker = EasyTracker.getInstance(context);
+
+                    // MapBuilder.createEvent().build() returns a Map of event fields and values
+                    // that are set and sent with the hit.
+                    easyTracker.send(MapBuilder
+                                    .createEvent("ui_action",     // Event category (required)
+                                            "Product Image Clicked",  // Event action (required)
+                                            "list_product_image",   // Event label
+                                            null)            // Event value
+                                    .build()
+                    );
 
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View view = inflater.inflate(R.layout.item_image, null);
@@ -104,9 +118,21 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
             productViewHolder.vName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*Intent intent = new Intent(context, ItemDetail.class);
-                    intent.putExtra("PRODUCT", productList.get(position)).putExtra("PARENT_ACTIVITY", "HomeFragment");
-                    context.startActivity(intent);*/
+
+                    // May return null if a EasyTracker has not yet been initialized with a
+                    // property ID.
+                    EasyTracker easyTracker = EasyTracker.getInstance(context);
+
+                    // MapBuilder.createEvent().build() returns a Map of event fields and values
+                    // that are set and sent with the hit.
+                    easyTracker.send(MapBuilder
+                                    .createEvent("ui_action",     // Event category (required)
+                                            "Product Info Pressed",  // Event action (required)
+                                            "list_product_name",   // Event label
+                                            null)            // Event value
+                                    .build()
+                    );
+
                     JSONObject features = null;
                     StringBuilder result = new StringBuilder("Features:" + '\n');
                     try {
@@ -128,13 +154,20 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                             .callback(new MaterialDialog.ButtonCallback() {
                                 @Override
                                 public void onPositive(MaterialDialog dialog) {
-                                    SnackbarManager.show(
-                                            Snackbar.with(context) // context
-                                                    .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
-                                                    .text("You Bought This Item") // text to be displayed
-                                                    .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
-                                                    .animation(false) // don't animate it
-                                            , (HomeActivity)context); // where it is displayed
+                                    // May return null if a EasyTracker has not yet been initialized with a
+                                    // property ID.
+                                    EasyTracker easyTracker = EasyTracker.getInstance(context);
+
+                                    // MapBuilder.createEvent().build() returns a Map of event fields and values
+                                    // that are set and sent with the hit.
+                                    easyTracker.send(MapBuilder
+                                                    .createEvent("ui_action",     // Event category (required)
+                                                            "Product Bought",  // Event action (required)
+                                                            "Buy",   // Event label
+                                                            null)            // Event value
+                                                    .build()
+                                    );
+                                    buyProduct(p._id, position, p.owner_first_name);
                                 }
                             });
                     dialog.build();
@@ -159,36 +192,39 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
             protected TextView vName;
             protected ImageView vImage;
             protected ImageView vDelete;
+            protected ImageView vBought;
             protected Context context;
 
             public ProductFriendViewHolder(View v) {
                 super(v);
                 vView = v;
-                vName =  (TextView) v.findViewById(R.id.list_product_name);
-                vImage = (ImageView)  v.findViewById(R.id.list_product_image);
+                vName = (TextView) v.findViewById(R.id.list_product_name);
+                vImage = (ImageView) v.findViewById(R.id.list_product_image);
                 vDelete = (ImageView) v.findViewById(R.id.product_delete_btn);
+                vBought = (ImageView) v.findViewById(R.id.product_bought);
                 context = v.getContext();
             }
         }
 
-        public void removeProduct(String _id, int _position) {
-            final String id = _id;
-            final int position = _position;
-
+        public void buyProduct(String product_id, int _position, String _owner) {
             if(restClient == null || genieService == null) {
                 return;
             }
-            genieService.removeProduct(id, new Callback<Product>() {
+
+            final int position = _position;
+            final String owner = _owner;
+
+            genieService.buyProduct(new BuyProductRequest(product_id), new Callback<Product>() {
                 @Override
                 public void success(Product product, Response response) {
                     SnackbarManager.show(
                             Snackbar.with(context) // context
                                     .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
-                                    .text("You Removed An Item") // text to be displayed
+                                    .text("You Granted " + owner + "'s Wish") // text to be displayed
                                     .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
                                     .animation(false) // don't animate it
-                            , (HomeActivity)context); // where it is displayed
-                    productList.remove(position);
+                            , (HomeActivity) context); // where it is displayed
+                    productList.get(position).bought = true;
                     notifyDataSetChanged();
                 }
 
@@ -200,7 +236,7 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                                     .text("Could Not Remove Item. Something Went Wrong.") // text to be displayed
                                     .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
                                     .animation(false) // don't animate it
-                            , (HomeActivity)context); // where it is displayed
+                            , (HomeActivity) context); // where it is displayed
                     System.out.println(retrofitError.getMessage());
                 }
             });

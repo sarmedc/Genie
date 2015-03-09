@@ -9,6 +9,13 @@
         <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/classes-2440d2111af6b699f005fe548589fd83017598a9.jar" />
     </item>
     <item
+        jar="/Users/saif/AndroidProjects/Genie/app/src/libs/libGoogleAnalyticsServices.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="db1e65d9e3ee616f871cb23120fbea8f18ad3e4c">
+        <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/libGoogleAnalyticsServices-881420f623d831f45c732ec745391b6fd9fc22f3.jar" />
+    </item>
+    <item
         jar="/Users/saif/AndroidProjects/Genie/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -100,18 +107,18 @@
         <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-c993b1107aed67f6179ef800d380591de7baf42b.jar" />
     </item>
     <item
-        jar="/Users/saif/AndroidProjects/Genie/app/build/intermediates/exploded-aar/com.afollestad/material-dialogs/0.6.3.5/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="579e006fea216b5fe5ee05b2cf1ad7404427d215">
-        <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/classes-a34e937a15107dc591fee640314644728111b983.jar" />
-    </item>
-    <item
         jar="/Users/saif/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
         <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/gson-2.3.1-4657fd01b1f8fed408b9c1bf427d3f2898de9222.jar" />
+    </item>
+    <item
+        jar="/Users/saif/AndroidProjects/Genie/app/build/intermediates/exploded-aar/com.afollestad/material-dialogs/0.6.3.5/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="579e006fea216b5fe5ee05b2cf1ad7404427d215">
+        <dex dex="/Users/saif/AndroidProjects/Genie/app/build/intermediates/pre-dexed/debug/classes-a34e937a15107dc591fee640314644728111b983.jar" />
     </item>
     <item
         jar="/Users/saif/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.0/7ff0e000d1e27e356567f56c92af3b8ab912636f/picasso-2.5.0.jar"

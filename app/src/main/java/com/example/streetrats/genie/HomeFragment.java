@@ -2,6 +2,7 @@ package com.example.streetrats.genie;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,15 +26,19 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "HomeFragment";
+
+    private View view;
 
     RestClient restClient;
     GenieService genieService;
 
     ArrayList<Product> productArray = new ArrayList<Product>();
     ArrayList<User> userArray = new ArrayList<User>();
+
+    private SwipeRefreshLayout mSwipeLayout;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -46,7 +51,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.home_landing,
+        view = inflater.inflate(R.layout.home_landing,
                 container, false);
 
         restClient = new RestClient();
@@ -80,7 +85,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
 
-                                getFriendsProducts(view, mAdapter, filter);
+                                getFriendsProducts(view, filter);
                             }
                         })
                         .positiveText(R.string.filter)
@@ -95,15 +100,23 @@ public class HomeFragment extends Fragment {
         mAdapter = new ProductsFriendAdapter(getActivity(), productArray);
         mRecyclerView.setAdapter(mAdapter);
 
-        getFriendsProducts(view, mAdapter, null);
+        getFriendsProducts(view, null);
+
+        mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         return view;
     }
 
-    public void getFriendsProducts(final View view, final RecyclerView.Adapter adapter, Map<String, String> filter) {
+    public void getFriendsProducts(final View view, Map<String, String> filter) {
         if(restClient == null || genieService == null) {
             return;
         }
+
+        final  RecyclerView.Adapter adapter = mAdapter;
 
         final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
                 .title("Fetching Your Friends' Products")
@@ -115,13 +128,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void success(List<Product> products, Response response) {
                 dialog.cancel();
-                if (products.size() != 0) {
-                    productArray.clear();
-                    for (int i = 0; i < products.size(); i++) {
-                        productArray.add(products.get(i));
-                    }
-                    adapter.notifyDataSetChanged();
+                productArray.clear();
+                for(int i = 0; i < products.size(); i++) {
+                    productArray.add(products.get(i));
                 }
+                adapter.notifyDataSetChanged();
+                mSwipeLayout.setRefreshing(false);
             }
 
             @Override
@@ -147,11 +159,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void success(List<User> friends, Response response) {
                 //dialog.cancel();
-                if(friends.size() != 0) {
-                    userArray.clear();
-                    for (int i = 0; i < friends.size(); i++) {
-                        userArray.add(friends.get(i));
-                    }
+                userArray.clear();
+                for (int i = 0; i < friends.size(); i++) {
+                    userArray.add(friends.get(i));
                 }
             }
 
@@ -162,6 +172,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onRefresh() {
+        getFriendsProducts(view, null);
     }
 }
 
