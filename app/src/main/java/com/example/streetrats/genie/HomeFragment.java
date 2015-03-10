@@ -140,6 +140,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             public void failure(RetrofitError retrofitError) {
                 dialog.cancel();
                 System.out.println(retrofitError.getMessage());
+                mSwipeLayout.setRefreshing(false);
             }
         });
     }

@@ -13,6 +13,7 @@ import com.example.streetrats.genie.rest.BuyProductRequest;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
+import com.facebook.Session;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.nispok.snackbar.Snackbar;
@@ -214,7 +215,7 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
             final int position = _position;
             final String owner = _owner;
 
-            genieService.buyProduct(new BuyProductRequest(product_id), new Callback<Product>() {
+            genieService.buyProduct(new BuyProductRequest(product_id, Session.getActiveSession().getAccessToken().toString()), new Callback<Product>() {
                 @Override
                 public void success(Product product, Response response) {
                     SnackbarManager.show(
@@ -225,6 +226,7 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                                     .animation(false) // don't animate it
                             , (HomeActivity) context); // where it is displayed
                     productList.get(position).bought = true;
+                    productList.remove(position);
                     notifyDataSetChanged();
                 }
 
@@ -233,7 +235,7 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                     SnackbarManager.show(
                             Snackbar.with(context) // context
                                     .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
-                                    .text("Could Not Remove Item. Something Went Wrong.") // text to be displayed
+                                    .text("Could Not Buy Item. Something Went Wrong.") // text to be displayed
                                     .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
                                     .animation(false) // don't animate it
                             , (HomeActivity) context); // where it is displayed

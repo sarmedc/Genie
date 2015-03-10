@@ -277,6 +277,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     return new FriendFragment();
                 case 2:
                     return new ProfileFragment();
+                case 3:
+                    return new BoughtFragment();
                 default:
                     // The other sections of the app are dummy placeholders.
                     fragment = new DummySectionFragment();
@@ -289,7 +291,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -301,7 +303,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 case 1:
                     return "Friends";
                 case 2:
-                    return "Profile";
+                    return "Wishes";
+                case 3:
+                    return "Bought";
                 default:
                     return "";
             }

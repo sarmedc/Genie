@@ -11,17 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.example.streetrats.genie.rest.AddProductRequest;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
 import com.facebook.Session;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
-import com.nispok.snackbar.enums.SnackbarType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,9 +28,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class BoughtFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String TAG = "ProfileFragment";
+    private static final String TAG = "BoughtFragment";
 
     private View view;
 
@@ -62,26 +57,17 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.profile,
+        view = inflater.inflate(R.layout.bought,
                 container, false);
 
         restClient = new RestClient();
         genieService = restClient.getGenieService();
 
-        filter.put("status", "unbought");
+        filter.put("status", "bought");
 
-        Button scanButton = (Button) view.findViewById(R.id.btnScan);
-        scanButton.setOnClickListener(new View.OnClickListener() {
+        Button btnFilter = (Button) view.findViewById(R.id.btnFilter);
+        btnFilter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SimpleScannerActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        Button logoutButton = (Button) view.findViewById(R.id.btnLogout);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                facebookLogout();
             }
         });
 
@@ -89,10 +75,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ProductsUserAdapter(getActivity(), productArray);
+        mAdapter = new ProductsBoughtAdapter(getActivity(), productArray);
         mRecyclerView.setAdapter(mAdapter);
 
-        getMyProducts(view);
+        getMyBoughtProducts(view);
 
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mSwipeLayout.setOnRefreshListener(this);
@@ -124,7 +110,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
-    public void getMyProducts(final View view) {
+    public void getMyBoughtProducts(final View view) {
         if(restClient == null || genieService == null) {
             return;
         }
@@ -132,25 +118,23 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         final RecyclerView.Adapter adapter = mAdapter;
 
         final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title("Fetching Your Products")
+                .title("Fetching Your Bought Products")
                 .content("Please Wait..")
                 .progress(true, 0)
                 .show();
 
-        genieService.getMyProducts(Session.getActiveSession().getAccessToken().toString(), filter, new Callback<List<Product>>() {
+        genieService.getMyBoughtProducts(Session.getActiveSession().getAccessToken().toString(), filter, new Callback<List<Product>>() {
             @Override
             public void success(List<Product> products, Response response) {
                 dialog.cancel();
                 Log.d(TAG, "" + products.size());
-                if (products.size() != 0) {
-                    productArray.clear();
-                    for (int i = 0; i < products.size(); i++) {
-                        System.out.println(products.get(i).features);
-                        productArray.add(products.get(i));
-                    }
-                    adapter.notifyDataSetChanged();
-                    mSwipeLayout.setRefreshing(false);
+                productArray.clear();
+                for (int i = 0; i < products.size(); i++) {
+                    System.out.println(products.get(i).features);
+                    productArray.add(products.get(i));
                 }
+                adapter.notifyDataSetChanged();
+                mSwipeLayout.setRefreshing(false);
             }
 
             @Override
@@ -163,61 +147,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     }
 
-    public void addProduct(final String upc) {
-        if(restClient == null || genieService == null) {
-            return;
-        }
-
-        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title("Adding Your Item")
-                .content("Please Wait..")
-                .progress(true, 0)
-                .show();
-
-        genieService.addProduct(new AddProductRequest(upc, Session.getActiveSession().getAccessToken()), new Callback<Product>() {
-            @Override
-            public void success(Product product, Response response) {
-                dialog.cancel();
-                productArray.add(product);
-                mAdapter.notifyDataSetChanged();
-                SnackbarManager.show(
-                        Snackbar.with(getActivity()) // context
-                                .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
-                                .text("Your Item Was Added") // text to be displayed
-                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT) // make it shorter
-                                .animation(false) // don't animate it
-                        , getActivity()); // where it is displayed
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {
-                dialog.cancel();
-                System.out.println(retrofitError.getMessage());
-                Toast toast = Toast.makeText(getActivity(), "This item is not available to add",  Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK){
-                String upc = data.getStringExtra("upc");
-                Log.d(TAG, "UPC: " + upc);
-                addProduct(upc);
-            }
-            if (resultCode == RESULT_CANCELED) {
-                //Write your code if there's no result
-                Log.d(TAG, "NO RESULT RECEIVED");
-                Toast toast = Toast.makeText(getActivity(), "No Result Was Recieved",  Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        }
-    }//onActivityResult
-
     @Override
     public void onRefresh() {
-        getMyProducts(view);
+        getMyBoughtProducts(view);
     }
 }

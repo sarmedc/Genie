@@ -25,7 +25,11 @@ public interface GenieService {
 
     @Headers("Content-Type: application/json")
     @GET("/api/user/{access_token}/products")
-    void getMyProducts(@Path("access_token") String access_token, Callback<List<Product>> callback);
+    void getMyProducts(@Path("access_token") String access_token, @QueryMap(encodeNames=true) Map<String, String> filters, Callback<List<Product>> callback);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/user/{access_token}/products/bought")
+    void getMyBoughtProducts(@Path("access_token") String access_token, @QueryMap(encodeNames=true) Map<String, String> filters, Callback<List<Product>> callback);
 
     @Headers("Content-Type: application/json")
     @GET("/api/user/{access_token}/friends/products")
@@ -42,5 +46,9 @@ public interface GenieService {
     @Headers("Content-Type: application/json")
     @POST("/api/user/friends/products")
     void buyProduct(@Body BuyProductRequest body, Callback<Product> callback);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/friends/products/unbought")
+    void unBuyProduct(@Body BuyProductRequest body, Callback<Product> callback);
 
 }
