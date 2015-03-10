@@ -2,7 +2,6 @@ package com.example.streetrats.genie;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,6 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
-import com.parse.ParseException;
-import com.parse.ParsePush;
-import com.parse.SendCallback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -237,8 +233,9 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                     productList.get(position).bought = true;
                     productList.remove(position);
                     notifyDataSetChanged();
-                    ParsePush push = new ParsePush();
-                    push.setChannel("channel54fbd7f5e09f1f030039fb75");
+                    /*ParsePush push = new ParsePush();
+                    //push.setChannel("channel54fbd7f5e09f1f030039fb75");
+                    push.setChannel("channel" + owner_id);
                     push.setMessage("Your Wish Has Been Granted!");
                     push.sendInBackground(new SendCallback() {
                         @Override
@@ -250,7 +247,7 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                                 Log.d("push", "failure");
                             }
                         }
-                    });
+                    });*/
                 }
 
                 @Override
