@@ -1,6 +1,8 @@
 package com.example.streetrats.genie;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,7 +138,11 @@ public class ProductsBoughtAdapter extends RecyclerView.Adapter<ProductsBoughtAd
                 );
 
                 JSONObject features = null;
-                StringBuilder result = new StringBuilder("Features:" + '\n');
+                StringBuilder result = new StringBuilder();
+                DecimalFormat df = new DecimalFormat("0.00");
+                String price = df.format(p.price);
+                result.append("Price: $" + price + '\n');
+                result.append('\n' + "Features:" + '\n');
                 try {
                     features = new JSONObject(p.features);
                     for(int i = 0; i < features.names().length(); i++) {
@@ -144,14 +150,34 @@ public class ProductsBoughtAdapter extends RecyclerView.Adapter<ProductsBoughtAd
                     }
                 } catch (JSONException e) {
                 }
-                DecimalFormat df = new DecimalFormat("0.00");
-                String price = df.format(p.price);
-                result.append('\n' + "Price: $" + price);
 
                 final MaterialDialog.Builder dialog = new MaterialDialog.Builder(context)
                         .title(p.name)
                         .content(result)
-                        .negativeText("Close");
+                        .negativeText("Close")
+                        .positiveText("Buy Item")
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                // May return null if a EasyTracker has not yet been initialized with a
+                                // property ID.
+                                EasyTracker easyTracker = EasyTracker.getInstance(context);
+
+                                // MapBuilder.createEvent().build() returns a Map of event fields and values
+                                // that are set and sent with the hit.
+                                easyTracker.send(MapBuilder
+                                                .createEvent("ui_action",     // Event category (required)
+                                                        "Product Buying",  // Event action (required)
+                                                        "Buy Item",   // Event label
+                                                        null)            // Event value
+                                                .build()
+                                );
+                                String url = "http://www.amazon.com/gp/mas/dl/android?s=" + p.name;
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                                browserIntent.setData(Uri.parse(url));
+                                context.startActivity(browserIntent);
+                            }
+                        });
                 dialog.build();
                 dialog.show();
             }

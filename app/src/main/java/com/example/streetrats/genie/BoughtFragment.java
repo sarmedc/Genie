@@ -16,6 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.streetrats.genie.rest.GenieService;
 import com.example.streetrats.genie.rest.Product;
 import com.example.streetrats.genie.rest.RestClient;
+import com.example.streetrats.genie.rest.User;
 import com.facebook.Session;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class BoughtFragment extends Fragment implements SwipeRefreshLayout.OnRef
     GenieService genieService;
 
     ArrayList<Product> productArray = new ArrayList<Product>();
+    ArrayList<User> userArray = new ArrayList<User>();
 
     private SwipeRefreshLayout mSwipeLayout;
 
@@ -63,11 +65,39 @@ public class BoughtFragment extends Fragment implements SwipeRefreshLayout.OnRef
         restClient = new RestClient();
         genieService = restClient.getGenieService();
 
-        filter.put("status", "bought");
+        getFriends(view);
 
-        Button btnFilter = (Button) view.findViewById(R.id.btnFilter);
-        btnFilter.setOnClickListener(new View.OnClickListener() {
+        Button filterButton = (Button) view.findViewById(R.id.btnFilter);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
+                CharSequence[] items = new CharSequence[userArray.size()];
+                for(int i = 0; i < userArray.size(); i++) {
+                    items[i] = userArray.get(i).first_name + " " + userArray.get(i).last_name;
+                }
+                new MaterialDialog.Builder(getActivity())
+                        .title("Filter By Friends")
+                        .items(items)
+                        .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMulti() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                Map<String, String> filter = new HashMap<String, String>();
+
+                                for(int i = 0; i < which.length; i++) {
+                                    try {
+                                        System.out.println(userArray.get(which[i]).first_name);
+                                        filter.put("owner" + i, userArray.get(which[i])._id);
+                                    }
+                                    catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                getMyBoughtProducts(view, filter);
+                            }
+                        })
+                        .positiveText(R.string.filter)
+                        .show();
             }
         });
 
@@ -78,7 +108,7 @@ public class BoughtFragment extends Fragment implements SwipeRefreshLayout.OnRef
         mAdapter = new ProductsBoughtAdapter(getActivity(), productArray);
         mRecyclerView.setAdapter(mAdapter);
 
-        getMyBoughtProducts(view);
+        getMyBoughtProducts(view, null);
 
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mSwipeLayout.setOnRefreshListener(this);
@@ -110,7 +140,7 @@ public class BoughtFragment extends Fragment implements SwipeRefreshLayout.OnRef
         }
     }
 
-    public void getMyBoughtProducts(final View view) {
+    public void getMyBoughtProducts(final View view, Map<String, String> filter) {
         if(restClient == null || genieService == null) {
             return;
         }
@@ -147,8 +177,39 @@ public class BoughtFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     }
 
+    public void getFriends(final View view) {
+        if(restClient == null || genieService == null) {
+            return;
+        }
+
+        /*final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title("Fetching Your Friends")
+                .content("Please Wait..")
+                .progress(true, 0)
+                .show();*/
+
+        genieService.getFriends(Session.getActiveSession().getAccessToken().toString(), new Callback<List<User>>() {
+            @Override
+            public void success(List<User> friends, Response response) {
+                //dialog.cancel();
+                userArray.clear();
+                for (int i = 0; i < friends.size(); i++) {
+                    userArray.add(friends.get(i));
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                //dialog.cancel();
+                System.out.println(retrofitError.getMessage());
+            }
+        });
+
+    }
+
+
     @Override
     public void onRefresh() {
-        getMyBoughtProducts(view);
+        getMyBoughtProducts(view, null);
     }
 }

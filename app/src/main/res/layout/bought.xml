@@ -95,7 +95,7 @@
             style="@style/navbar_button"
             android:id="@+id/btnFilter"
             android:text="Filter"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:layout_height="fill_parent"
             />
     </RadioGroup>

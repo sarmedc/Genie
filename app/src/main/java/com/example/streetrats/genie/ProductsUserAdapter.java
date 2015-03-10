@@ -117,7 +117,9 @@ public class ProductsUserAdapter extends RecyclerView.Adapter<ProductsUserAdapte
                     intent.putExtra("PRODUCT", productList.get(position)).putExtra("PARENT_ACTIVITY", "HomeFragment");
                     context.startActivity(intent);*/
                 JSONObject features = null;
-                StringBuilder result = new StringBuilder("Features:" + '\n');
+                StringBuilder result = new StringBuilder();
+                result.append("Price: $" + p.price + '\n');
+                result.append('\n' + "Features:" + '\n');
                 try {
                     features = new JSONObject(p.features);
                     for(int i = 0; i < features.names().length(); i++) {
@@ -125,7 +127,6 @@ public class ProductsUserAdapter extends RecyclerView.Adapter<ProductsUserAdapte
                     }
                 } catch (JSONException e) {
                 }
-                result.append('\n' + "Price: $" + p.price);
 
                 final MaterialDialog.Builder dialog = new MaterialDialog.Builder(context)
                         .title(p.name)

@@ -26,9 +26,6 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.google.analytics.tracking.android.EasyTracker;
-import com.parse.ParseException;
-import com.parse.ParsePush;
-import com.parse.SaveCallback;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -136,7 +133,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 for(int i = 0; i < user.friends.size(); i++) {
                     System.out.println("User Friend: " + user.friends.get(i));
                 }
-                ParsePush.subscribeInBackground("channel" + user._id, new SaveCallback() {
+                /*ParsePush.subscribeInBackground("channel" + user._id, new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
@@ -145,7 +142,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             Log.e("com.parse.push", "failed to subscribe for push", e);
                         }
                     }
-                });
+                });*/
             }
 
             @Override
@@ -312,11 +309,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             //return "Section " + (position + 1);
             switch (position) {
                 case 0:
-                    return "Home";
+                    return "Wishes";
                 case 1:
                     return "Friends";
                 case 2:
-                    return "Wishes";
+                    return "My Wishes";
                 case 3:
                     return "Bought";
                 default:

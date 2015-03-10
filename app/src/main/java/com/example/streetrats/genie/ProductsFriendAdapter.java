@@ -2,6 +2,7 @@ package com.example.streetrats.genie;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,9 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
+import com.parse.ParseException;
 import com.parse.ParsePush;
+import com.parse.SendCallback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -136,7 +139,12 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                     );
 
                     JSONObject features = null;
-                    StringBuilder result = new StringBuilder("Features:" + '\n');
+                    StringBuilder result = new StringBuilder();
+                    result.append("Wished By: " + p.owner_first_name + " " + p.owner_last_name + '\n');
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String price = df.format(p.price);
+                    result.append('\n' + "Price: $" + price + '\n');
+                    result.append('\n' + "Features:" + '\n');
                     try {
                         features = new JSONObject(p.features);
                         for(int i = 0; i < features.names().length(); i++) {
@@ -144,14 +152,13 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                         }
                     } catch (JSONException e) {
                     }
-                    DecimalFormat df = new DecimalFormat("0.00");
-                    String price = df.format(p.price);
-                    result.append('\n' + "Price: $" + price);
+
+
 
                     final MaterialDialog.Builder dialog = new MaterialDialog.Builder(context)
                             .title(p.name)
                             .content(result)
-                            .positiveText("Buy")
+                            .positiveText("Grant")
                             .negativeText("Close")
                             .callback(new MaterialDialog.ButtonCallback() {
                                 @Override
@@ -165,7 +172,7 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                                     easyTracker.send(MapBuilder
                                                     .createEvent("ui_action",     // Event category (required)
                                                             "Product Bought",  // Event action (required)
-                                                            "Buy",   // Event label
+                                                            "Grant",   // Event label
                                                             null)            // Event value
                                                     .build()
                                     );
@@ -231,9 +238,19 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                     productList.remove(position);
                     notifyDataSetChanged();
                     ParsePush push = new ParsePush();
-                    push.setChannel("channel" + owner_id);
+                    push.setChannel("channel54fbd7f5e09f1f030039fb75");
                     push.setMessage("Your Wish Has Been Granted!");
-                    push.sendInBackground();
+                    push.sendInBackground(new SendCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e == null) {
+                                Log.d("push", "success");
+                            }
+                            else {
+                                Log.d("push", "failure");
+                            }
+                        }
+                    });
                 }
 
                 @Override
