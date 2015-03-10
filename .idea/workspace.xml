@@ -43,22 +43,12 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.streetrats.genie" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a94e565-2840-4238-b7f3-d893be93fec0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/BoughtFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsBoughtAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bought.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ItemDetail.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/Logout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout-v11/item.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/friend_detail.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/BuyProductRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/BuyProductRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/GenieService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/GenieService.java" />
+    <list default="true" id="4a94e565-2840-4238-b7f3-d893be93fec0" name="Default" comment="Adding Parse Setup">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ParsePushApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ParsePushApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/Product.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/Product.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsFriendAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsFriendAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsUserAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsUserAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Genie.iws" />
@@ -127,10 +117,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProfileFragment.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ProfileFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3685504" vertical-offset="1258" max-vertical-offset="2865">
+            <state vertical-scroll-proportion="-69.80769" vertical-offset="0" max-vertical-offset="2865">
               <caret line="159" column="50" selection-start-line="159" selection-start-column="50" selection-end-line="159" selection-end-column="50" />
               <folding>
                 <element signature="e#1717#1733#0" expanded="true" />
@@ -144,8 +134,8 @@
       <file leaf-file-name="ParsePushApplication.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ParsePushApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-              <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+              <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -180,7 +170,7 @@
       <file leaf-file-name="ProductsBoughtAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsBoughtAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2340" max-vertical-offset="3450">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2715" max-vertical-offset="3450">
               <caret line="203" column="55" selection-start-line="203" selection-start-column="55" selection-end-line="203" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -199,27 +189,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/profile.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.333333" vertical-offset="765" max-vertical-offset="1620">
-              <caret line="75" column="55" selection-start-line="0" selection-start-column="0" selection-end-line="102" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ProductsFriendAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsFriendAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2670" max-vertical-offset="3165">
-              <caret line="218" column="25" selection-start-line="218" selection-start-column="25" selection-end-line="218" selection-end-column="25" />
+            <state vertical-scroll-proportion="-7.6538463" vertical-offset="3146" max-vertical-offset="3690">
+              <caret line="234" column="64" selection-start-line="234" selection-start-column="64" selection-end-line="234" selection-end-column="64" />
               <folding>
-                <element signature="e#6748#8058#0" expanded="true" />
-                <element signature="e#8027#8028#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#6776#8095#0" expanded="true" />
+                <element signature="e#8064#8065#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -238,21 +216,35 @@
       <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4485" max-vertical-offset="4905">
-              <caret line="329" column="9" selection-start-line="329" selection-start-column="9" selection-end-line="329" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="5100">
+              <caret line="138" column="60" selection-start-line="138" selection-start-column="60" selection-end-line="138" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11781#11852#0" expanded="true" />
+                <element signature="e#5467#5908#0" expanded="true" />
+                <element signature="e#5889#5890#0" expanded="true" />
+                <element signature="e#12387#12458#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-              <caret line="37" column="50" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1080" max-vertical-offset="1860">
+              <caret line="85" column="45" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
+              <folding>
+                <element signature="e#3549#3565#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductsUserAdapter.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsUserAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.25" vertical-offset="1022" max-vertical-offset="2535">
+              <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -1430,26 +1422,26 @@
         <option value="$PROJECT_DIR$/app/src/main/java/ParsePushApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_friends_products.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsUserAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/login.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/analytics.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_products.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/home_landing.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ParsePushApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/bought.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/Product.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/BuyProductRequest.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsFriendAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/GenieService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsBoughtAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/BoughtFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ParsePushApplication.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsFriendAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsUserAdapter.java" />
       </list>
     </option>
   </component>
@@ -2070,7 +2062,11 @@
       <created>1425942899121</created>
       <updated>1425942899121</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Added another tab for bought items, can unbuy items">
+      <created>1425973114098</created>
+      <updated>1425973114098</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -2095,7 +2091,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32754344" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2109,8 +2105,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32754344" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37965262" sideWeight="0.642246" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4280397" sideWeight="0.7970852" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37965262" sideWeight="0.642246" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4280397" sideWeight="0.7970852" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32754344" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24879615" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2143,8 +2139,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Changed Activities to Fragments" />
-    <MESSAGE value="Added Slidable Navigation. Figuring out how to manage session data" />
     <MESSAGE value="Added Tab Navigation. Figuring out how to manage session data" />
     <MESSAGE value="Showing Some Fragments as an Example" />
     <MESSAGE value="added friend search page" />
@@ -2168,7 +2162,9 @@
     <MESSAGE value="Not sure what I did. But I did something" />
     <MESSAGE value="Added filters, separated friends products from user products, and some stuff" />
     <MESSAGE value="Pretty much done. I guess" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pretty much done. I guess" />
+    <MESSAGE value="Added another tab for bought items, can unbuy items" />
+    <MESSAGE value="Adding Parse Setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Parse Setup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2203,8 +2199,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="2850">
           <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding>
-            <element signature="e#2298#2618#0" expanded="true" />
-            <element signature="e#2603#2604#0" expanded="true" />
+            <element signature="e#2298#2618#0" expanded="false" />
+            <element signature="e#2603#2604#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2241,8 +2237,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="452" max-vertical-offset="3240">
           <caret line="72" column="65" selection-start-line="72" selection-start-column="65" selection-end-line="72" selection-end-column="65" />
           <folding>
-            <element signature="e#6748#8058#0" expanded="true" />
-            <element signature="e#8027#8028#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#6776#8095#0" expanded="true" />
+            <element signature="e#8064#8065#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2407,26 +2404,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsUserAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.076923" vertical-offset="390" max-vertical-offset="2475">
-          <caret line="68" column="29" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/rest/RestClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13856813" vertical-offset="0" max-vertical-offset="433">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13856813" vertical-offset="0" max-vertical-offset="1935">
-          <caret line="4" column="66" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2481,8 +2462,8 @@
         <state vertical-scroll-proportion="3.6374135" vertical-offset="0" max-vertical-offset="2565">
           <caret line="124" column="23" selection-start-line="124" selection-start-column="23" selection-end-line="124" selection-end-column="23" />
           <folding>
-            <element signature="e#2298#2618#0" expanded="true" />
-            <element signature="e#2603#2604#0" expanded="true" />
+            <element signature="e#2298#2618#0" expanded="false" />
+            <element signature="e#2603#2604#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2506,27 +2487,6 @@
         <state vertical-scroll-proportion="0.77832514" vertical-offset="1139" max-vertical-offset="1605">
           <caret line="97" column="35" selection-start-line="97" selection-start-column="35" selection-end-line="97" selection-end-column="35" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ParsePushApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-          <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4485" max-vertical-offset="4905">
-          <caret line="329" column="9" selection-start-line="329" selection-start-column="9" selection-end-line="329" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#11781#11852#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2554,26 +2514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsBoughtAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2340" max-vertical-offset="3450">
-          <caret line="203" column="55" selection-start-line="203" selection-start-column="55" selection-end-line="203" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1750#1751#0" expanded="true" />
-            <element signature="e#1791#1792#0" expanded="true" />
-            <element signature="e#2357#2520#0" expanded="true" />
-            <element signature="e#2509#2510#0" expanded="true" />
-            <element signature="e#2576#4489#0" expanded="true" />
-            <element signature="e#4185#4375#0" expanded="true" />
-            <element signature="e#4356#4357#0" expanded="true" />
-            <element signature="e#4478#4479#0" expanded="true" />
-            <element signature="e#4543#6387#0" expanded="true" />
-            <element signature="e#6376#6377#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/BoughtFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-32.96154" vertical-offset="883" max-vertical-offset="1995">
@@ -2594,26 +2534,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsFriendAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2565" max-vertical-offset="3165">
-          <caret line="218" column="25" selection-start-line="218" selection-start-column="25" selection-end-line="218" selection-end-column="25" />
-          <folding>
-            <element signature="e#6748#8058#0" expanded="true" />
-            <element signature="e#8027#8028#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProfileFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3685504" vertical-offset="1258" max-vertical-offset="2865">
+        <state vertical-scroll-proportion="-69.80769" vertical-offset="0" max-vertical-offset="2865">
           <caret line="159" column="50" selection-start-line="159" selection-start-column="50" selection-end-line="159" selection-end-column="50" />
           <folding>
             <element signature="e#1717#1733#0" expanded="true" />
             <element signature="e#8032#8033#0" expanded="true" />
             <element signature="e#8067#8068#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ParsePushApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+          <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsBoughtAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2340" max-vertical-offset="3450">
+          <caret line="203" column="55" selection-start-line="203" selection-start-column="55" selection-end-line="203" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1750#1751#0" expanded="true" />
+            <element signature="e#1791#1792#0" expanded="true" />
+            <element signature="e#2357#2520#0" expanded="true" />
+            <element signature="e#2509#2510#0" expanded="true" />
+            <element signature="e#2576#4489#0" expanded="true" />
+            <element signature="e#4185#4375#0" expanded="true" />
+            <element signature="e#4356#4357#0" expanded="true" />
+            <element signature="e#4478#4479#0" expanded="true" />
+            <element signature="e#4543#6387#0" expanded="true" />
+            <element signature="e#6376#6377#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="5100">
+          <caret line="138" column="60" selection-start-line="138" selection-start-column="60" selection-end-line="138" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5467#5908#0" expanded="true" />
+            <element signature="e#5889#5890#0" expanded="true" />
+            <element signature="e#12387#12458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsFriendAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.6538463" vertical-offset="3146" max-vertical-offset="3690">
+          <caret line="234" column="64" selection-start-line="234" selection-start-column="64" selection-end-line="234" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6776#8095#0" expanded="true" />
+            <element signature="e#8064#8065#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1080" max-vertical-offset="1860">
+          <caret line="85" column="45" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
+          <folding>
+            <element signature="e#3549#3565#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/streetrats/genie/ProductsUserAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25" vertical-offset="1022" max-vertical-offset="2535">
+          <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>

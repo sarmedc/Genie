@@ -15,6 +15,7 @@ import com.example.streetrats.genie.rest.RestClient;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
+import com.parse.ParsePush;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -108,6 +109,10 @@ public class ProductsUserAdapter extends RecyclerView.Adapter<ProductsUserAdapte
         productViewHolder.vName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ParsePush push = new ParsePush();
+                push.setChannel("channel54fbc31de09f1f030039fb71");
+                push.setMessage("Pressed");
+                push.sendInBackground();
                     /*Intent intent = new Intent(context, ItemDetail.class);
                     intent.putExtra("PRODUCT", productList.get(position)).putExtra("PARENT_ACTIVITY", "HomeFragment");
                     context.startActivity(intent);*/

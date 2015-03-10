@@ -68,11 +68,6 @@
             android:label="Genie"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name="com.example.streetrats.genie.ItemDetail"
-            android:screenOrientation="portrait"
-            android:label="ItemDetail">
-        </activity>
-        <activity
             android:name="com.example.streetrats.genie.SimpleScannerActivity"
             android:screenOrientation="portrait"
             android:label="SimpleScannerActivity"

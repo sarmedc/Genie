@@ -19,6 +19,7 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
+import com.parse.ParsePush;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -168,7 +169,7 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                                                             null)            // Event value
                                                     .build()
                                     );
-                                    buyProduct(p._id, position, p.owner_first_name);
+                                    buyProduct(p._id, position, p.owner_first_name, p.owner);
                                 }
                             });
                     dialog.build();
@@ -207,13 +208,14 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
             }
         }
 
-        public void buyProduct(String product_id, int _position, String _owner) {
+        public void buyProduct(final String product_id, int _position, String _owner, String _owner_id) {
             if(restClient == null || genieService == null) {
                 return;
             }
 
             final int position = _position;
             final String owner = _owner;
+            final String owner_id = _owner_id;
 
             genieService.buyProduct(new BuyProductRequest(product_id, Session.getActiveSession().getAccessToken().toString()), new Callback<Product>() {
                 @Override
@@ -228,6 +230,10 @@ public class ProductsFriendAdapter extends RecyclerView.Adapter<ProductsFriendAd
                     productList.get(position).bought = true;
                     productList.remove(position);
                     notifyDataSetChanged();
+                    ParsePush push = new ParsePush();
+                    push.setChannel("channel" + owner_id);
+                    push.setMessage("Your Wish Has Been Granted!");
+                    push.sendInBackground();
                 }
 
                 @Override
