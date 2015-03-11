@@ -119,7 +119,7 @@ public class ProductsUserAdapter extends RecyclerView.Adapter<ProductsUserAdapte
                 JSONObject features = null;
                 StringBuilder result = new StringBuilder();
                 result.append("Price: $" + p.price + '\n');
-                result.append('\n' + "Features:" + '\n');
+                result.append('\n' + "Item Information:" + '\n');
                 try {
                     features = new JSONObject(p.features);
                     for(int i = 0; i < features.names().length(); i++) {

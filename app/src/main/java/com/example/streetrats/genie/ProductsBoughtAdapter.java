@@ -142,7 +142,7 @@ public class ProductsBoughtAdapter extends RecyclerView.Adapter<ProductsBoughtAd
                 DecimalFormat df = new DecimalFormat("0.00");
                 String price = df.format(p.price);
                 result.append("Price: $" + price + '\n');
-                result.append('\n' + "Features:" + '\n');
+                result.append('\n' + "Item Information:" + '\n');
                 try {
                     features = new JSONObject(p.features);
                     for(int i = 0; i < features.names().length(); i++) {
